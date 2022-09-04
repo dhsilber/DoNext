@@ -1,11 +1,12 @@
-import { DoData } from "./DoData"
+import { ToDo } from "./DoData"
 
-const RepeatingDos = () => {
-    const dos = new DoData
+interface RepeatingDosProps {
+    data: ToDo[]
+}
 
+const RepeatingDos = ({ data }: RepeatingDosProps) => {
     return <ul>
-        {dos.list.map((todo) =>
-            <li key={todo.text}>{todo.text}</li>)}
+        {data.map((todo) => <li key={todo.text}>{todo.text}</li>)}
     </ul>
 }
 
