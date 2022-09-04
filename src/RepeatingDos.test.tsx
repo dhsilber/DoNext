@@ -1,15 +1,14 @@
 import { render, screen } from '@testing-library/react'
-import { DoData } from './DoData'
+import { defaultData } from './App'
 import RepeatingDos from './RepeatingDos'
 
 it('show repeating todos', () => {
-    const dos = new DoData
-    const first = dos.list[0].text
-    const last = dos.list[dos.list.length-1].text
-  
-    render(<RepeatingDos />)
-  
+    const dos = defaultData
+    const first = dos.todos[0].text
+    const last = dos.todos[dos.todos.length - 1].text
+
+    render(<RepeatingDos data={dos.todos}/>)
+
     screen.getByText(first)
     screen.getByText(last)
-  })
-  
+})
