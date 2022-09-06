@@ -1,6 +1,6 @@
 # Do Next
 
-Do Next will show me the next few things that I need to do alongside my daily repeating tasks.
+*Do Next* will show me the next few things that I need to do alongside my daily repeating tasks.
 
 The repeating tasks are all about building habits. 
 It feels good to check them off my list every day, but ideally I'll do them even without the reminders.
