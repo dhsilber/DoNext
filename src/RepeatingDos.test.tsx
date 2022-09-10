@@ -1,37 +1,55 @@
 import { render, screen } from '@testing-library/react'
 import { defaultData } from './App'
-import { ToDoData } from './DoData'
-import RepeatingDos, { checker } from './RepeatingDos'
+import RepeatingDos from './RepeatingDos'
 import MockDate from 'mockdate'
-
 
 afterEach(() => {
     MockDate.reset()
 })
 
 it('show repeating todos', () => {
-    const dos = defaultData
+    const dos = JSON.parse(JSON.stringify( defaultData))
     const first = dos.todos[0].text
     const last = dos.todos[dos.todos.length - 1].text
 
-    render(<RepeatingDos data={dos.todos} store={jest.fn()} />)
+    render(<RepeatingDos data={dos.todos} />)
 
     screen.getByText(first)
     screen.getByText(last)
 })
 
-it('checker', () => {
-    MockDate.set(1234)
-    const todo: ToDoData = { text: "test text", done: 0 }
-    const todoList = [todo, { text: "hi", done: 0 }]
-    const mockStore = jest.fn()
-    const exptectedTodoList: ToDoData[] = [
-        { text: "test text", done: 1234 },
-        { text: "hi", done: 0 }
-    ]
+it.each([
+    [0],
+    [Date.UTC(2000, 8, 9, 16)],
+    [Date.UTC(2022, 8, 8, 0, 0, 1)],
+    [Date.UTC(2022, 8, 8, 23, 59, 59)],
+])('display name of todo when it has been checked at %p', (doneTime: number) => {
+    MockDate.set(Date.UTC(2022, 8, 9, 0, 0, 1))
+    const dos = JSON.parse(JSON.stringify( defaultData))
+    const first = dos.todos[0].text
+    const last = dos.todos[dos.todos.length - 1].text
+    dos.todos[0].done = doneTime
 
-    checker(todo, todoList, mockStore)
+    render(<RepeatingDos data={dos.todos} />)
 
-    expect(mockStore).toHaveBeenCalled()
-    expect(mockStore).toHaveBeenCalledWith(exptectedTodoList)
+    expect(screen.queryByText(last)).toBeInTheDocument()
+    expect(screen.queryByText(first)).toBeInTheDocument()
+})
+
+it.each([
+    [Date.UTC(2022, 8, 9, 0, 0, 1)],
+    [Date.UTC(2022, 8, 9, 16)],
+    [Date.UTC(2022, 8, 9, 23, 59, 59)],
+    [Date.UTC(2100, 8, 8)],
+])('does not display name of todo when it has been checked at %p', (doneTime: number) => {
+    MockDate.set(Date.UTC(2022, 8, 9))
+    const dos = JSON.parse(JSON.stringify( defaultData))
+    const first = dos.todos[0].text
+    const last = dos.todos[dos.todos.length - 1].text
+    dos.todos[0].done = doneTime
+
+    render(<RepeatingDos data={dos.todos} />)
+
+    expect(screen.queryByText(last)).toBeInTheDocument()
+    expect(screen.queryByText(first)).not.toBeInTheDocument()
 })

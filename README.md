@@ -15,3 +15,15 @@ OTOH, things that block tasks might themselves be tasks. ("Buy nails for birdhou
 
 Right now *Do Next* just shows a list of todo items, which doesn't look like much.
 OTOH, it will ingest & download the set of todo items and keep them in the browser's local storage, so they are instantly available when the app is reloaded.
+
+To start: `npm start`
+To test: `npm test`
+
+I skimped on the testing of the storage because it is a hard problem.
+Testing that code would be very useful, but first I want to see that the project has the merit of being more useful to me than other solutions.
+
+Next things for this app are:
+- Filter todo items by day of week
+- Filter todo items by day of month
+- Display Google Calendar Events for today
+- *DoNext* should know work hours and highlight conflicts between calendar events and work hours

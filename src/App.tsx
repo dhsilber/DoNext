@@ -5,6 +5,7 @@ import LoadData from './LoadData'
 import { DoNextData } from './DoData'
 import useLocalStorageState from 'use-local-storage-state'
 import UnloadData from './UnloadData'
+import dayStartMilliseconds from './DayStartMillisocnds'
 
 export const defaultData: DoNextData = {
   todos: [
@@ -13,6 +14,7 @@ export const defaultData: DoNextData = {
     { text: "Ingest your data", done: 0 },
   ]
 }
+
 function App() {
   // const [data, setData] = useState<ToDo[]>([])
   const [localStorage, setLocalStorage] = useLocalStorageState('donext', {
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <RepeatingDos data={localStorage.todos} store={setLocalStorage} />
+      <RepeatingDos data={localStorage.todos} />
       <LoadData setData={persistData} />
       <UnloadData data={localStorage} />
     </div>
