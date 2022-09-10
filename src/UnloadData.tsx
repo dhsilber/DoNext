@@ -1,22 +1,23 @@
 import React from "react"
-import { DoNextData } from "./DoData"
 
-function exportUserInfo(data: DoNextData) {
-    const fileData = JSON.stringify(data, null, 2) + '\n'
+function exportUserInfo(jsonData: string, fileName: string) {
+    const fileData = jsonData + '\n'
     const blob = new Blob([fileData], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
-    link.download = "doNextDownload.json"
+    link.download = fileName
     link.href = url
     link.click()
 }
 
 export interface UnloadDataProps {
-    data: DoNextData
+    jsonData: string,
+    prompt: string,
+    fileName: string,
 }
 
-const UnloadData = ({ data }: UnloadDataProps) => {
-    return <button onClick={() => exportUserInfo(data)}>Download</button>
+const UnloadData = ({ jsonData, prompt, fileName }: UnloadDataProps) => {
+    return <button onClick={() => exportUserInfo(jsonData, fileName)}>{prompt}</button>
 }
 
 export default UnloadData
