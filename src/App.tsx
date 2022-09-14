@@ -6,7 +6,6 @@ import Events from './Events'
 import { defaultToDoData } from './storage/Storage'
 import Storage from './storage/Storage'
 import { TodoStorageKey } from './Constants'
-import Notes from './Notes'
 
 function App() {
   // const [data, setData] = useState<ToDo[]>([])
@@ -20,7 +19,6 @@ function App() {
       <div>-----------------------------------------------------------------------</div>
       <Events />
       <div>-----------------------------------------------------------------------</div>
-      <Notes />
       <div>-----------------------------------------------------------------------</div>
       <Storage />
     </div>
