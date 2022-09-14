@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import { ToDoData } from "./DoData"
 import ToDo from "./ToDo"
-import { defaultData } from "./App"
 import checker from "./Checker"
+import { defaultToDoData } from "./storage/Storage"
 jest.mock('./Checker')
 
 it('displays name of todo', () => {
@@ -33,6 +33,6 @@ it('checking box stores timestamp', () => {
     const checkboxElement = screen.getByRole("checkbox")
     fireEvent.click(checkboxElement)
     expect(checker).toHaveBeenCalledTimes(1)
-    expect(checker).toHaveBeenCalledWith(data, defaultData, expect.anything())
+    expect(checker).toHaveBeenCalledWith(data, defaultToDoData, expect.anything())
 })
 

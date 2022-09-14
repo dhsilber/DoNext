@@ -1,11 +1,10 @@
 import { FormEvent } from "react"
-import { DoNextData } from "./DoData"
 
 
 // Stolen mostly from a StackOverflow article
-const fileHandler = async (
+const fileHandler = async <Type,>(
     event: FormEvent<HTMLInputElement>,
-    setData: (data: DoNextData) => void
+    setData: (data: Type) => void
 ) => {
     const target = (event.target as HTMLInputElement)
     const blobData = await target.files?.item(0)?.text()
@@ -15,13 +14,14 @@ const fileHandler = async (
     }
 }
 
-export interface LoadDataProps {
-    setData: (data: DoNextData) => void
+export interface LoadDataProps<Type,> {
+    setData: (data: Type) => void
+    prompt: string
 }
 
-const LoadData = ({ setData }: LoadDataProps) => {
+const LoadData = <Type,>({ setData, prompt }: LoadDataProps<Type>) => {
     return <div>
-        Ingest:
+        {prompt}
         <input
             type="file"
             accept="text/json"

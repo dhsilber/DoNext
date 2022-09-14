@@ -1,22 +1,23 @@
 import React from "react"
 import useLocalStorageState from 'use-local-storage-state'
-import { defaultData } from "./App"
 import checker from "./Checker"
+import { TodoStorageKey } from "./Constants"
 import { ToDoData } from "./DoData"
+import { defaultToDoData } from "./storage/Storage"
 
 export interface ToDoProps {
     todo: ToDoData
 }
 
 const ToDo = ({ todo }: ToDoProps) => {
-    const [localStorage, setLocalStorage] = useLocalStorageState('donext', {
-        defaultValue: defaultData
+    const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
+        defaultValue: defaultToDoData
     })
 
     return <li >
         <input
             type="checkbox"
-            onClick={(event) => { checker(todo, localStorage, setLocalStorage) }}
+            onClick={(event) => { checker(todo, todoStorage, setTodoStorage) }}
         />
         {todo.text}
     </li>
