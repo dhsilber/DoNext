@@ -9,23 +9,26 @@ enum Day {
     Sunday,
     Monday,
     Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
 }
 
 const EventThingy = ({ index, events }: EventProps) => {
     const event = events[index]
     const eventStartDate = new Date(event.start)
     const dayOfWeek = Day[eventStartDate.getDay()]
-    const startTime = eventStartDate.getHours() + ":" + eventStartDate.getMinutes()
+    const startTime = eventStartDate.getHours().toString().padStart(2, '0') + ":" + eventStartDate.getMinutes().toString().padStart(2, '0')
     const eventEndDate = new Date(event.start + event.duration)
-    const endTime = eventEndDate.getHours() + ":" + (eventEndDate.getMinutes() || "00")
+    const endTime = eventEndDate.getHours().toString().padStart(2, '0') + ":" + eventEndDate.getMinutes().toString().padStart(2, '0')
 
     const displayDayOfWeek = index === 0 || new Date(events[index - 1].start).getDay() !== eventStartDate.getDay()
+    const eventDisplayText = event.duration? ` ${startTime} - ${endTime}  ${event.text}` : ` ${startTime}  ${event.text}`
 
     return <div>
-        {displayDayOfWeek && <h1>{dayOfWeek}</h1>}
-        {(index === 0 || events[index - 1].start !== event.start) && <h2>{startTime}</h2>}
-        <div key={event.start}>{event.text}</div>
-        {(index === events.length - 1 || events[index + 1].start !== event.start + event.duration) && <h2>{endTime}</h2>}
+        {displayDayOfWeek && <h2>{dayOfWeek}</h2>}
+        <div key={event.start}>{eventDisplayText}</div>
     </div>
 }
 

@@ -15,6 +15,23 @@ export const defaultToDoData: DoNextData = {
 }
 
 export const defaultEventData: DoEventsData = {
+    routine: [
+        {
+            text: "Sleep",
+            start: 82800000,
+            duration: 26400000
+        },  
+        {
+            text: "Work - morning",
+            start: 30600000,
+            duration: 14400000
+        },
+        {
+            text: "Work - afternoon",
+            start: 48600000,
+            duration: 14400000
+        }
+    ],
     events: [
         { text: "Download default configuration", start: 0, duration: 0 },
         { text: "Edit to make it yours", start: 0, duration: 0 },
@@ -38,13 +55,13 @@ const Storage = () => {
     return <div className='storage'>
         <div className='storage-area'>
             <h3>Todos Storage</h3>
-            <LoadData setData={setTodoStorage} prompt={"Ingest todos:"}/>
+            <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
             <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextDownload.json' />
         </div>
         <div className='storage-area'>
             <h3>Events Storage</h3>
-            <LoadData setData={setEventStorage} prompt={"Ingest events:"}/>
-            <UnloadData jsonData={eventData} prompt={"Download events"} fileName='doNextEventsDownload.json'/>
+            <LoadData setData={setEventStorage} prompt={"Ingest events:"} />
+            <UnloadData jsonData={eventData} prompt={"Download events"} fileName='doNextEventsDownload.json' />
         </div>
     </div>
 }

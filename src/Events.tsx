@@ -1,8 +1,9 @@
 import React from 'react'
 import useLocalStorageState from 'use-local-storage-state'
-import { EventStorageKey } from './Constants'
+import { EventStorageKey, HourMilliseconds } from './Constants'
 import { defaultEventData } from './storage/Storage'
 import EventThingy from './event/Event'
+import EventSorter from './event/EventSorter'
 
 
 const Events = () => {
@@ -10,10 +11,10 @@ const Events = () => {
         defaultValue: defaultEventData
     })
 
-    const startTime = Date.now() - 2 * 60 * 60 * 1000
-    const endTime = Date.now() + 48 * 60 * 60 * 1000
-    const currentEvents = eventStorage.events
-        .filter(event => (event.start + event.duration) > startTime && event.start < endTime)
+    // const startTime = Date.now() - 2 * HourMilliseconds
+    // const endTime = Date.now() + 48 * HourMilliseconds
+    const currentEvents = EventSorter(eventStorage)
+        // .filter(event => (event.start + event.duration) > startTime && event.start < endTime)
 
     const size = currentEvents.length
     let result = []

@@ -1,6 +1,13 @@
 # Do Next
 
-*Do Next* will show me the next few things that I need to do alongside my daily repeating tasks.
+*Do Next* will show me the available time in my schedule and the tasks and projects that I might use that time for.
+
+It currently shows my routine, events, and todo list. These are all stored in the browser's local storage, so they are instantly available when the app is reloaded. This data can be loaded them from files and downloaded as well.
+
+It does not yet:
+- show/track projects
+- highlight next tasks
+- show events from my Google calendar
 
 The repeating tasks are all about building habits. 
 It feels good to check them off my list every day, but ideally I'll do them even without the reminders.
@@ -12,9 +19,6 @@ Many tasks / projects are things that are constrained in some way.
 (E.g. appointment for vision test must be made during business hours.)
 Tasks which are not eligible for doing right now should not be competing for my attention with other tasks.
 OTOH, things that block tasks might themselves be tasks. ("Buy nails for birdhouse project")
-
-Right now *Do Next* just shows a list of todo items, which doesn't look like much.
-OTOH, it will ingest & download the set of todo items and keep them in the browser's local storage, so they are instantly available when the app is reloaded.
 
 To start: `npm start`
 To test: `npm test`

@@ -12,23 +12,23 @@ test('Renders single event', () => {
   render(<EventThingy index={0} events={data} />)
 
   expect(screen.getByText("Monday")).toBeInTheDocument()
-  expect(screen.getByText("19:30")).toBeInTheDocument()
-  expect(screen.getByText("demo event")).toBeInTheDocument()
-  expect(screen.getByText("19:45")).toBeInTheDocument()
+  expect(screen.getByText(/19:30/)).toBeInTheDocument()
+  expect(screen.getByText(/demo event/)).toBeInTheDocument()
+  expect(screen.getByText(/19:45/)).toBeInTheDocument()
 })
 
 test('second of events on sequential days', () => {
   render(<EventThingy index={1} events={data} />)
 
   expect(screen.getByText("Tuesday")).toBeInTheDocument()
-  expect(screen.getByText("17:30")).toBeInTheDocument()
-  expect(screen.getByText("another event")).toBeInTheDocument()
+  expect(screen.getByText(/17:30/)).toBeInTheDocument()
+  expect(screen.getByText(/another event/)).toBeInTheDocument()
 })
 
 test('event starting at end time of previous event', () => {
   render(<EventThingy index={2} events={data} />)
 
-  expect(screen.getByText("19:47")).toBeInTheDocument()
-  expect(screen.getByText("third event")).toBeInTheDocument()
-  expect(screen.getByText("20:00")).toBeInTheDocument()
+  expect(screen.getByText(/19:47/)).toBeInTheDocument()
+  expect(screen.getByText(/third event/)).toBeInTheDocument()
+  expect(screen.getByText(/20:00/)).toBeInTheDocument()
 })
