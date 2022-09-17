@@ -5,7 +5,7 @@ import useLocalStorageState from 'use-local-storage-state'
 import Events from './Events'
 import { defaultToDoData } from './storage/Storage'
 import Storage from './storage/Storage'
-import { TodoStorageKey } from './Constants'
+import { MinuteMilliseconds, TodoStorageKey } from './Constants'
 
 function App() {
   const [, setStateToForceRerender] = useState(new Date())
@@ -16,16 +16,15 @@ function App() {
   useEffect(() => {
     setInterval(() => {
       setStateToForceRerender(new Date())
-    }, 10 * 60 * 1000)
+    }, MinuteMilliseconds)
   }, [])
 
   return (
     <div className="App">
-      <RepeatingDos data={todoStorage.todos} />
-      <div>-----------------------------------------------------------------------</div>
       <Events />
       <div>-----------------------------------------------------------------------</div>
-
+      <RepeatingDos data={todoStorage.todos} />
+      <div>-----------------------------------------------------------------------</div>
       <div>-----------------------------------------------------------------------</div>
       <Storage />
     </div>

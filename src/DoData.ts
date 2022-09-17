@@ -14,7 +14,14 @@ export interface EventData {
     duration: number
 }
 
+export interface Routine {
+    text: string
+    start: number 
+    duration: number
+}
+
 export interface DoEventsData {
+    routine: Routine[]
     events: EventData[]
 }
 
