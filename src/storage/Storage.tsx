@@ -1,8 +1,8 @@
 import React from 'react'
-import './Storage.css'
+import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
 import { EventStorageKey, TodoStorageKey } from '../Constants'
-import { DoEventsData, DoNextData } from '../DoData'
+import { DoEventsData, DoNextData, ProjectSet } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
@@ -20,7 +20,7 @@ export const defaultEventData: DoEventsData = {
             text: "Sleep",
             start: 82800000,
             duration: 26400000
-        },  
+        },
         {
             text: "Work - morning",
             start: 30600000,
@@ -39,6 +39,10 @@ export const defaultEventData: DoEventsData = {
     ]
 }
 
+export const defaultProjectData: ProjectSet = {
+    projects: []
+}
+
 const Storage = () => {
 
     const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
@@ -53,12 +57,12 @@ const Storage = () => {
     const eventData = JSON.stringify(eventStorage, null, 2)
 
     return <div className='storage'>
-        <div className='storage-area'>
+        <div className='storageTodo'>
             <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
             <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextDownload.json' />
         </div>
-        <div className='storage-area'>
+        <div className='storageEvent'>
             <h3>Events Storage</h3>
             <LoadData setData={setEventStorage} prompt={"Ingest events:"} />
             <UnloadData jsonData={eventData} prompt={"Download events"} fileName='doNextEventsDownload.json' />

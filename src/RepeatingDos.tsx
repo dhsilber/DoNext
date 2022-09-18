@@ -1,4 +1,4 @@
-import { dayNowStartMilliseconds } from "./DayStartMillisocnds"
+import { dayNowStartMilliseconds } from "./DateUtilities"
 import { ToDoData } from "./DoData"
 import ToDo from "./ToDo"
 
@@ -9,7 +9,7 @@ interface RepeatingDosProps {
 const RepeatingDos = ({ data }: RepeatingDosProps) => {
     const dayStart = dayNowStartMilliseconds()
 
-    return <ul>
+    return <ul className="todo">
         {
             data
                 .filter(todo => todo.done < dayStart)

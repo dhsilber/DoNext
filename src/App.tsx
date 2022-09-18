@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import './App.css'
+import './DoNext.css'
 import RepeatingDos from './RepeatingDos'
 import useLocalStorageState from 'use-local-storage-state'
-import Events from './Events'
+import Events from './event/Events'
 import { defaultToDoData } from './storage/Storage'
 import Storage from './storage/Storage'
 import { MinuteMilliseconds, TodoStorageKey } from './Constants'
+import Projects from './project/Projects'
 
 function App() {
   const [, setStateToForceRerender] = useState(new Date())
@@ -19,16 +20,14 @@ function App() {
     }, MinuteMilliseconds)
   }, [])
 
-  return (
+  return <>
     <div className="App">
       <Events />
-      <div>-----------------------------------------------------------------------</div>
       <RepeatingDos data={todoStorage.todos} />
-      <div>-----------------------------------------------------------------------</div>
-      <div>-----------------------------------------------------------------------</div>
       <Storage />
+      <Projects />
     </div>
-  )
+  </>
 }
 
 export default App
