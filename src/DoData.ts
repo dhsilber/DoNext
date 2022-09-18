@@ -25,4 +25,14 @@ export interface DoEventsData {
     events: EventData[]
 }
 
+export interface Project {
+    text: string
+    beginning: number
+    minutes: number
+}
+
+export interface ProjectSet {
+    projects: Project[]
+}
+
 

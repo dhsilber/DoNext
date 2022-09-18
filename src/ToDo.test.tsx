@@ -35,4 +35,3 @@ it('checking box stores timestamp', () => {
     expect(checker).toHaveBeenCalledTimes(1)
     expect(checker).toHaveBeenCalledWith(data, defaultToDoData, expect.anything())
 })
-

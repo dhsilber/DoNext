@@ -1,0 +1,44 @@
+.App {
+  display: grid;
+  grid-template-areas:
+    "todo events projects"
+    "todo notes notes"
+    "storageTodo notes notes"
+    "storageEvent notes notes";
+  background-color: #282c34;
+  gap: 2px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.events {
+  grid-area: events;
+  background-color: #90b1f3;
+}
+
+.todo {
+  grid-area: todo;
+  background-color: #90b1f3;
+}
+
+.notes {
+  grid-area: notes;
+  background-color: #90b1f3;
+}
+
+.projects {
+  grid-area: projects;
+  background-color: #90b1f3;
+}
+
+.storageTodo {
+  grid-area: storageTodo;
+  background-color: #90b1f3;
+}
+
+.storageEvent {
+  grid-area: storageEvent;
+  background-color: #90b1f3;
+}
