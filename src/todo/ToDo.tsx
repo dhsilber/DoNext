@@ -1,12 +1,12 @@
 import React from "react"
 import useLocalStorageState from 'use-local-storage-state'
 import checker from "./Checker"
-import { TodoStorageKey } from "./Constants"
-import { ToDoData } from "./DoData"
-import { defaultToDoData } from "./storage/Storage"
+import { TodoStorageKey } from "../Constants"
+import { Todo } from "../DoData"
+import { defaultToDoData } from "../storage/Storage"
 
 export interface ToDoProps {
-    todo: ToDoData
+    todo: Todo
 }
 
 const ToDo = ({ todo }: ToDoProps) => {

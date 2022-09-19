@@ -1,10 +1,10 @@
-import { DoNextData, ToDoData } from "./DoData"
+import { TodoSet, Todo } from "../DoData"
 
 const checker = (
     // event: React.MouseEvent<HTMLInputElement, MouseEvent>,
-    item: ToDoData,
-    storedData: DoNextData,
-    setStore: (data: DoNextData) => void
+    item: Todo,
+    storedData: TodoSet,
+    setStore: (data: TodoSet) => void
 ) => {
     const data = storedData.todos
     data.forEach(datum => {

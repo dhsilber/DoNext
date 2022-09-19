@@ -2,15 +2,15 @@ import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
 import { EventStorageKey, TodoStorageKey } from '../Constants'
-import { DoEventsData, DoNextData, ProjectSet } from '../DoData'
+import { DoEventsData, TodoSet, ProjectSet } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
-export const defaultToDoData: DoNextData = {
+export const defaultToDoData: TodoSet = {
     todos: [
-        { text: "Download default configuration", done: 0 },
-        { text: "Edit to make it yours", done: 0 },
-        { text: "Ingest your data", done: 0 },
+        { text: "Download default configuration", done: 0, days: [] },
+        { text: "Edit to make it yours", done: 0, days: [] },
+        { text: "Ingest your data", done: 0, days: [] },
     ]
 }
 

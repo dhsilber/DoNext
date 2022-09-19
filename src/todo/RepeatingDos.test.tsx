@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import RepeatingDos from './RepeatingDos'
 import MockDate from 'mockdate'
-import { defaultToDoData } from './storage/Storage'
+import { defaultToDoData } from '../storage/Storage'
+import { Todo, TodoSet } from '../DoData'
 
 afterEach(() => {
     MockDate.reset()
 })
 
-it('show repeating todos', () => {
+test('show repeating todos', () => {
     const dos = JSON.parse(JSON.stringify(defaultToDoData))
     const first = dos.todos[0].text
     const last = dos.todos[dos.todos.length - 1].text
@@ -18,7 +19,7 @@ it('show repeating todos', () => {
     screen.getByText(last)
 })
 
-it.each([
+test.each([
     [0],
     [Date.UTC(2000, 8, 9, 16)],
     [Date.UTC(2022, 8, 8, 0, 0, 1)],
@@ -36,7 +37,7 @@ it.each([
     expect(screen.queryByText(first)).toBeInTheDocument()
 })
 
-it.each([
+test.each([
     [Date.UTC(2022, 8, 9, 4, 0, 1)],
     [Date.UTC(2022, 8, 9, 16)],
     [Date.UTC(2022, 8, 9, 23, 59, 59)],
@@ -52,4 +53,19 @@ it.each([
 
     expect(screen.queryByText(last)).toBeInTheDocument()
     expect(screen.queryByText(first)).not.toBeInTheDocument()
+})
+
+test('do not show todos marked for other than the current day', () => {
+    MockDate.set(Date.UTC(2022, 8, 9, 4))
+    const todoData: Todo[] = [
+        { text: "Download default configuration", done: 0, days: [] },
+        { text: "Edit to make it yours", done: 0, days: [0, 1, 2, 3, 4, 6] },
+        { text: "Ingest your data", done: 0, days: [5] },
+    ]
+
+    render(<RepeatingDos data={todoData} />)
+
+    expect(screen.queryByText("Download default configuration")).toBeInTheDocument()
+    expect(screen.queryByText("Edit to make it yours")).not.toBeInTheDocument()
+    expect(screen.queryByText("Ingest your data")).toBeInTheDocument()
 })
