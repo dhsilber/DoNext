@@ -29,8 +29,11 @@ const Projects = () => {
         projectStore(project, projectStorage, setProjectStorage)
     }
 
+    const orderedProjects = projectStorage
+        .projects.sort((a, b) => { if (b.minutes > a.minutes) { return -1 } else { return 1 } })
+
     return <div className="projects">
-        <ProjectList projectSet={projectStorage} tally={tallyMimnutes} />
+        <ProjectList projectSet={{projects: orderedProjects}} tally={tallyMimnutes} />
         {edit && <ProjectEdit project={emptyProject} save={save} />}
         <button onClick={() => setEdit(true)} >+</button>
     </div>
