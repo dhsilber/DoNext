@@ -1,11 +1,12 @@
 
-export interface ToDoData {
+export interface Todo {
     text: string
-    done: number 
+    done: number
+    days: number[]
 }
 
-export interface DoNextData {
-    todos: ToDoData[]
+export interface TodoSet {
+    todos: Todo[]
 }
 
 export interface EventData {

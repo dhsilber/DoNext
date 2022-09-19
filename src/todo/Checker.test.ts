@@ -1,6 +1,6 @@
 import MockDate from 'mockdate'
 import checker from './Checker'
-import { DoNextData, ToDoData } from './DoData'
+import { TodoSet, Todo } from '../DoData'
 
 afterEach(() => {
     MockDate.reset()
@@ -8,15 +8,15 @@ afterEach(() => {
 
 it('checker', () => {
     MockDate.set(1234)
-    const todo: ToDoData = { text: "test text", done: 0 }
-    const todoList = [todo, { text: "hi", done: 0 }]
+    const todo: Todo = { text: "test text", done: 0, days: [] }
+    const todoList: Todo[] = [todo, { text: "hi", done: 0, days: [] }]
     const allData = { todos: todoList }
     const mockStore = jest.fn()
-    const exptectedTodoData: DoNextData = {
+    const exptectedTodoData: TodoSet = {
         todos:
             [
-                { text: "test text", done: 1234 },
-                { text: "hi", done: 0 }
+                { text: "test text", done: 1234, days: [] },
+                { text: "hi", done: 0, days: [] }
             ]
     }
 

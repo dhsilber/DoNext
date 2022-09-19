@@ -1,18 +1,20 @@
-import { dayNowStartMilliseconds } from "./DateUtilities"
-import { ToDoData } from "./DoData"
+import { dayNowStartMilliseconds } from "../DateUtilities"
+import { Todo } from "../DoData"
 import ToDo from "./ToDo"
 
 interface RepeatingDosProps {
-    data: ToDoData[]
+    data: Todo[]
 }
 
 const RepeatingDos = ({ data }: RepeatingDosProps) => {
     const dayStart = dayNowStartMilliseconds()
+    const today = new Date().getDay()
 
     return <ul className="todo">
         {
             data
                 .filter(todo => todo.done < dayStart)
+                .filter(todo => todo.days.length === 0 || todo.days.find(day => day === today))
                 .map((todo) => <ToDo key={todo.text} todo={todo} />)
         }
     </ul>

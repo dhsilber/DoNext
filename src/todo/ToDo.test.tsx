@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import { ToDoData } from "./DoData"
+import { Todo } from "../DoData"
 import ToDo from "./ToDo"
 import checker from "./Checker"
-import { defaultToDoData } from "./storage/Storage"
+import { defaultToDoData } from "../storage/Storage"
 jest.mock('./Checker')
 
 it('displays name of todo', () => {
     const name = "Text of todo"
-    const data: ToDoData = { text: name, done: 0 }
+    const data: Todo = { text: name, done: 0, days: [] }
 
     render(<ToDo todo={data} />)
 
@@ -16,7 +16,7 @@ it('displays name of todo', () => {
 
 it('displays checkbox', () => {
     const name = "Text of todo"
-    const data: ToDoData = { text: name, done: 0 }
+    const data: Todo = { text: name, done: 0, days: [] }
 
     render(<ToDo todo={data} />)
 
@@ -26,7 +26,7 @@ it('displays checkbox', () => {
 it('checking box stores timestamp', () => {
     const mockChecker = jest.fn()
     const name = "Text of todo"
-    const data: ToDoData = { text: name, done: 0 }
+    const data: Todo = { text: name, done: 0, days: [] }
 
     render(<ToDo todo={data} />)
 
