@@ -1,5 +1,5 @@
 import { Project, ProjectSet } from "../DoData"
-import { projectStore } from "./ProjectStorage"
+import { projectStore } from "./ProjectStore"
 
 test('stores a new project', () => {
     const mockStore = jest.fn()

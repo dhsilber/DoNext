@@ -1,9 +1,9 @@
 import MockDate from 'mockdate'
 import { NowMarker } from '../Constants'
-import { DoEventsData, EventData } from '../DoData'
+import { EventSet, Event } from '../DoData'
 import eventSorter from './EventSorter'
 
-const soureceData: DoEventsData = {
+const soureceData: EventSet = {
     routine: [
         {
             text: "Sleep",
@@ -30,7 +30,7 @@ const soureceData: DoEventsData = {
 }
 
 const fixedTestTime = Date.UTC(2022, 8, 12, 15, 30)
-const resultData: EventData[] = [
+const resultData: Event[] = [
 
 // One day:    86400000
     { text: "Work - morning", start: 1662985800000, duration: 14400000 },

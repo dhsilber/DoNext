@@ -9,7 +9,7 @@ export interface TodoSet {
     todos: Todo[]
 }
 
-export interface EventData {
+export interface Event {
     text: string
     start: number 
     duration: number
@@ -21,9 +21,9 @@ export interface Routine {
     duration: number
 }
 
-export interface DoEventsData {
+export interface EventSet {
     routine: Routine[]
-    events: EventData[]
+    events: Event[]
 }
 
 export interface Project {

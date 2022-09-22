@@ -1,8 +1,8 @@
 import { DayMilliseconds, HourMilliseconds, NowMarker } from '../Constants'
 import { dayTimestampStartMilliseconds } from '../DateUtilities'
-import { DoEventsData, EventData } from '../DoData'
+import { EventSet, Event } from '../DoData'
 
-const eventSorter = (source: DoEventsData) => {
+const eventSorter = (source: EventSet) => {
 
     const startTime = Date.now() - 2 * HourMilliseconds
     const endTime = Date.now() + 48 * HourMilliseconds
@@ -16,9 +16,9 @@ const eventSorter = (source: DoEventsData) => {
     }
 
     const constructedEvents = midnights.flatMap((midnight) => {
-        let routineEvents: EventData[] = []
+        let routineEvents: Event[] = []
         routineSchedule.forEach((routine) => {
-            let event: EventData = {
+            let event: Event = {
                 text: routine.text,
                 start: midnight + routine.start,
                 duration: routine.duration
