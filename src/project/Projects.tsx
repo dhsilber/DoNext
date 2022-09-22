@@ -5,7 +5,7 @@ import { Project } from '../DoData'
 import { defaultProjectData } from '../storage/Storage'
 import ProjectEdit from './ProjectEdit'
 import ProjectList from './ProjectList'
-import { projectStore } from './ProjectStorage'
+import { projectStore } from './ProjectStore'
 
 const emptyProject: Project = {
     text: "",
@@ -24,7 +24,7 @@ const Projects = () => {
         projectStore(project, projectStorage, setProjectStorage)
     }
 
-    const tallyMimnutes = (project: Project) => {
+    const tallyMinutes = (project: Project) => {
         project.minutes += 15
         projectStore(project, projectStorage, setProjectStorage)
     }
@@ -33,7 +33,7 @@ const Projects = () => {
         .projects.sort((a, b) => { if (b.minutes > a.minutes) { return -1 } else { return 1 } })
 
     return <div className="projects">
-        <ProjectList projectSet={{projects: orderedProjects}} tally={tallyMimnutes} />
+        <ProjectList projectSet={{projects: orderedProjects}} tally={tallyMinutes} />
         {edit && <ProjectEdit project={emptyProject} save={save} />}
         <button onClick={() => setEdit(true)} >+</button>
     </div>

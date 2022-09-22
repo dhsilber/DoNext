@@ -1,8 +1,8 @@
-import { EventData } from '../DoData'
+import { Event } from '../DoData'
 
 interface EventProps {
     index: number
-    events: EventData[]
+    events: Event[]
 }
 
 enum Day {
@@ -15,7 +15,7 @@ enum Day {
     Saturday
 }
 
-const EventThingy = ({ index, events }: EventProps) => {
+const EventElement = ({ index, events }: EventProps) => {
     const event = events[index]
     const eventStartDate = new Date(event.start)
     const dayOfWeek = Day[eventStartDate.getDay()]
@@ -27,9 +27,9 @@ const EventThingy = ({ index, events }: EventProps) => {
     const eventDisplayText = event.duration? ` ${startTime} - ${endTime}  ${event.text}` : ` ${startTime}  ${event.text}`
 
     return <div>
-        {displayDayOfWeek && <h2>{dayOfWeek}</h2>}
+        {displayDayOfWeek && <h3>{dayOfWeek}</h3>}
         <div key={event.start}>{eventDisplayText}</div>
     </div>
 }
 
-export default EventThingy
+export default EventElement

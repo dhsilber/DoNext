@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import EventThingy from './Event'
+import EventElement from './EventElement'
 
 const data = [
   { text: "demo event", start: 1663025400000,     duration: 900000 },
@@ -9,7 +9,7 @@ const data = [
 ]
 
 test('Renders single event', () => {
-  render(<EventThingy index={0} events={data} />)
+  render(<EventElement index={0} events={data} />)
 
   expect(screen.getByText("Monday")).toBeInTheDocument()
   expect(screen.getByText(/19:30/)).toBeInTheDocument()
@@ -18,7 +18,7 @@ test('Renders single event', () => {
 })
 
 test('second of events on sequential days', () => {
-  render(<EventThingy index={1} events={data} />)
+  render(<EventElement index={1} events={data} />)
 
   expect(screen.getByText("Tuesday")).toBeInTheDocument()
   expect(screen.getByText(/17:30/)).toBeInTheDocument()
@@ -26,7 +26,7 @@ test('second of events on sequential days', () => {
 })
 
 test('event starting at end time of previous event', () => {
-  render(<EventThingy index={2} events={data} />)
+  render(<EventElement index={2} events={data} />)
 
   expect(screen.getByText(/19:47/)).toBeInTheDocument()
   expect(screen.getByText(/third event/)).toBeInTheDocument()

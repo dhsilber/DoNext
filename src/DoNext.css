@@ -1,10 +1,15 @@
 .App {
   display: grid;
   grid-template-areas:
-    "todo events projects"
+    /* "todo events projects"
     "todo notes notes"
     "storageTodo notes notes"
-    "storageEvent notes notes";
+    "storageEvent notes notes"; */
+
+    "notes events"
+    "notes todo"
+    "notes projects"
+    "storageTodo storageEvent";
   background-color: #282c34;
   gap: 2px;
 }
