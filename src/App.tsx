@@ -23,6 +23,7 @@ function App() {
 
   return <>
     <div className="App">
+      <div className='analyze'/>
       <Events />
       <RepeatingDos data={todoStorage.todos} />
       <Storage />

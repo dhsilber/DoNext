@@ -60,7 +60,7 @@ const Storage = () => {
         <div className='storageTodo'>
             <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
-            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextDownload.json' />
+            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' />
         </div>
         <div className='storageEvent'>
             <h3>Events Storage</h3>
