@@ -8,7 +8,7 @@ import ProjectList from './ProjectList'
 import { projectStore } from './ProjectStore'
 
 const emptyProject: Project = {
-    text: "",
+    text: '',
     beginning: 0,
     minutes: 0,
 }
@@ -32,8 +32,8 @@ const Projects = () => {
     const orderedProjects = projectStorage
         .projects.sort((a, b) => { if (b.minutes > a.minutes) { return -1 } else { return 1 } })
 
-    return <div className="projects">
-        <ProjectList projectSet={{projects: orderedProjects}} tally={tallyMinutes} />
+    return <div className='projects'>
+        <ProjectList projectSet={{ projects: orderedProjects }} tally={tallyMinutes} />
         {edit && <ProjectEdit project={emptyProject} save={save} />}
         <button onClick={() => setEdit(true)} >+</button>
     </div>

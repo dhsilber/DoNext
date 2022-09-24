@@ -1,21 +1,28 @@
 .App {
   display: grid;
   grid-template-areas:
-    /* "todo events projects"
-    "todo notes notes"
-    "storageTodo notes notes"
-    "storageEvent notes notes"; */
-
-    "notes events"
-    "notes todo"
-    "notes projects"
-    "storageTodo storageEvent";
+    "notes notes analyze"
+    "notes notes track"
+    "notes notes events"
+    "notes notes todo"
+    "notes notes projects"
+    "storageTodo storageEvent projects";
   background-color: #282c34;
   gap: 2px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.analyze {
+  grid-area: analyze;
+  background-color: #90f3bb;
+}
+
+.track {
+  grid-area: track;
+  background-color: #338ef0;
 }
 
 .events {

@@ -2,7 +2,7 @@ import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
 import { EventStorageKey, TodoStorageKey } from '../Constants'
-import { EventSet, TodoSet, ProjectSet } from '../DoData'
+import { EventSet, TodoSet, ProjectSet, TrackSet } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
@@ -43,6 +43,10 @@ export const defaultProjectData: ProjectSet = {
     projects: []
 }
 
+export const defaultTrackData: TrackSet = {
+    tracks: []
+}
+
 const Storage = () => {
 
     const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
@@ -60,7 +64,7 @@ const Storage = () => {
         <div className='storageTodo'>
             <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
-            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextDownload.json' />
+            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' />
         </div>
         <div className='storageEvent'>
             <h3>Events Storage</h3>
