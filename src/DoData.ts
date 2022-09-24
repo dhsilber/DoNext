@@ -36,4 +36,13 @@ export interface ProjectSet {
     projects: Project[]
 }
 
+export interface Track {
+    text: string
+    tracked: number[]
+}
+
+export interface TrackSet {
+    tracks: Track[]
+}
+
 

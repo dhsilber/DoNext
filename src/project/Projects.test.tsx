@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import MockDate from 'mockdate'
 import userEvent from '@testing-library/user-event'
 import Projects from './Projects'
-import { ProjectResetAllForTests } from './ProjectResetAllForTests'
+// import { ProjectResetAllForTests } from './ProjectResetAllForTests'
 
 test('has add button', () => {
     render(<Projects />)
