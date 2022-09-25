@@ -34,7 +34,7 @@ test('has form defaults', () => {
     expect(screen.getAllByRole('textbox', { name: '-' })[1]).toHaveDisplayValue('13')
     expect(screen.getByRole('textbox', { name: 'time:' })).toHaveDisplayValue('00')
     expect(screen.getByRole('textbox', { name: ':' })).toHaveDisplayValue('08')
-    expect(screen.getByRole('textbox', { name: 'duration:' })).toHaveDisplayValue('30')
+    expect(screen.getByRole('textbox', { name: 'duration:' })).toHaveDisplayValue('030')
     screen.getByRole('button', { name: 'Done' })
 })
 

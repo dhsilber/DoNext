@@ -56,6 +56,6 @@ test('clicking a checkbox adds current timestamp to track\'s list', () => {
     userEvent.click(screen.getByRole('checkbox', { name: 'some track name' }))
 
     expect(screen.getByText('some track name')).toBeInTheDocument()
-    expect(screen.getByText('last tracked at:')).toBeInTheDocument()
+    expect(screen.getByText('- last at:')).toBeInTheDocument()
     expect(screen.getByText('2022-01-02 13:24')).toBeInTheDocument()
 })
