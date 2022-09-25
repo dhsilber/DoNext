@@ -61,9 +61,9 @@ test('clicking a checkbox adds 15 minutes to that project\'s tally', () => {
     userEvent.click(screen.getByRole('checkbox', { name: 'some project name' }))
 
     expect(screen.getByText('some project name')).toBeInTheDocument()
-    expect(screen.getByText('15 minutes since 2022-09-18')).toBeInTheDocument()
+    expect(screen.getByText('- 15 minutes since 2022-09-18')).toBeInTheDocument()
     expect(screen.getByText('other project')).toBeInTheDocument()
-    expect(screen.getByText('0 minutes since 2022-09-17')).toBeInTheDocument()
+    expect(screen.getByText('- 0 minutes since 2022-09-17')).toBeInTheDocument()
 })
 
 // test('projects are sorted according to their relative minutes', () => {

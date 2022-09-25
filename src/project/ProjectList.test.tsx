@@ -44,5 +44,5 @@ test('each project shows accumulated time and start date', () => {
     render(<ProjectList projectSet={projectSet} tally={mockTally} />)
 
     expect(screen.getByText('project name')).toBeInTheDocument()
-    expect(screen.getByText('0 minutes since 2022-09-18')).toBeInTheDocument()
+    expect(screen.getByText('- 0 minutes since 2022-09-18')).toBeInTheDocument()
 })

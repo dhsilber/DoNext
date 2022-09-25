@@ -35,7 +35,7 @@ const EventEdit = ({ event, save }: EventEditProps) => {
         <Entry prompt={'time:'} value={hours} size={2} setter={setHours} />
         <Entry prompt={':'} value={minutes} size={2} setter={setMinutes} />
         <br />
-        <Entry prompt={'duration:'} value={'30'} size={2} setter={setDuration} />
+        <Entry prompt={'duration:'} value={'30'} size={3} setter={setDuration} />
         <br />
         <button onClick={() => {
             const dateString = `${year}`

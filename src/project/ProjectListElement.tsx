@@ -6,7 +6,7 @@ interface ProjectListElementProps {
 }
 
 const ProjectListElement = ({ project, tally }: ProjectListElementProps) => {
-    const message = ` ${project.minutes} minutes since ${new Date(project.beginning).toISOString().split('T')[0]}`
+    const message = ` - ${project.minutes} minutes since ${new Date(project.beginning).toISOString().split('T')[0]}`
     return <div>
         <label>
             <input

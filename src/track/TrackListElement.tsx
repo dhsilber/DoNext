@@ -21,7 +21,7 @@ const TrackListElement = ({ track, tracker }: TrackListElementProps) => {
             />
             {track.text}
         </label>
-        {hasTimestamps && <span>last tracked at:</span>}
+        {hasTimestamps && <span> - last at: </span>}
         <span>{lastTimestamp}</span>
     </div>
 }

@@ -45,7 +45,7 @@ test('each track shows last tracking timestamp', () => {
     render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
 
     expect(screen.getByText('track name')).toBeInTheDocument()
-    expect(screen.getByText('last tracked at:')).toBeInTheDocument()
+    expect(screen.getByText('- last at:')).toBeInTheDocument()
     expect(screen.getByText('2022-01-02 13:24')).toBeInTheDocument()
 })
 
