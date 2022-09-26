@@ -36,6 +36,7 @@ const Projects = () => {
         <ProjectList projectSet={{ projects: orderedProjects }} tally={tallyMinutes} />
         {edit && <ProjectEdit project={emptyProject} save={save} />}
         <button onClick={() => setEdit(true)} >+</button>
+        <button onClick={() => setEdit(true)} >foo</button>
     </div>
 }
 

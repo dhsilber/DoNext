@@ -4,12 +4,13 @@ import { Track } from "../DoData"
 interface TrackListElementProps {
     track: Track
     tracker: (track: Track) => void
+    setEditTrack: (track: Track) => void
 }
 
-const TrackListElement = ({ track, tracker }: TrackListElementProps) => {
+const TrackListElement = ({ track, tracker, setEditTrack }: TrackListElementProps) => {
     // const message = ` ${track.minutes} minutes since ${new Date(track.beginning).toISOString().split('T')[0]}`
     const hasTimestamps = track.tracked.length > 0
-    const lastTimestamp = hasTimestamps ? formatDate(new Date(track.tracked[0])) : ''
+    const lastTimestamp = (hasTimestamps ? formatDate(new Date(track.tracked[0])) : '') + ' '
     return <div>
         <label>
             <input
@@ -23,6 +24,7 @@ const TrackListElement = ({ track, tracker }: TrackListElementProps) => {
         </label>
         {hasTimestamps && <span> - last at: </span>}
         <span>{lastTimestamp}</span>
+        <button onClick={() => {setEditTrack(track)}} >&amp;</button>
     </div>
 }
 

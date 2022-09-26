@@ -12,7 +12,7 @@ test('shows list of tracks', () => {
             { text: 'other track', tracked: [], },
         ]
     }
-    render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={()=>{}}/>)
 
     expect(screen.getByText('track name')).toBeInTheDocument()
     expect(screen.getByText('other track')).toBeInTheDocument()
@@ -26,7 +26,7 @@ test('each track has a checkbox', () => {
             { text: 'other track', tracked: [], },
         ]
     }
-    render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={()=>{}}/>)
 
     expect(screen.getByRole('checkbox', { name: 'track name' })).toBeInTheDocument()
     expect(screen.getByRole('checkbox', { name: 'other track' })).toBeInTheDocument()
@@ -42,7 +42,7 @@ test('each track shows last tracking timestamp', () => {
             },
         ]
     }
-    render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={()=>{}}/>)
 
     expect(screen.getByText('track name')).toBeInTheDocument()
     expect(screen.getByText('- last at:')).toBeInTheDocument()
@@ -59,14 +59,15 @@ test('each track shows no timestamp if tracking has never been activated', () =>
             },
         ]
     }
-    render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={()=>{}}/>)
 
     expect(screen.getByText('track name')).toBeInTheDocument()
     expect(screen.queryByText('last tracked at:')).not.toBeInTheDocument()
     expect(screen.queryByText('2022-01-02 13:24')).not.toBeInTheDocument()
 })
 
-test('clicking a track\'s checkbox adds a current timestamp to that track', () => {
+test('clicking a track\'s checkbox adds a current timestamp to that track', async () => {
+    const user =userEvent.setup()
     MockDate.set(Date.parse('2022-01-02T13:24:00.000'))
     const mockTracker = jest.fn((track: Track) => { })
     const trackSet: TrackSet = {
@@ -82,10 +83,31 @@ test('clicking a track\'s checkbox adds a current timestamp to that track', () =
         tracked: [1641147840000],
     }
 
-    render(<TrackList trackSet={trackSet} tracker={mockTracker} />)
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={()=>{}}/>)
 
-    userEvent.click(screen.getByRole('checkbox', { name: 'track name' }))
+    await user.click(screen.getByRole('checkbox', { name: 'track name' }))
 
     expect(mockTracker).toHaveBeenCalledTimes(1)
     expect(mockTracker).toHaveBeenCalledWith(expected)
+})
+
+test('clicking a & button edits that track', async () => {
+    const user =userEvent.setup()
+    const mockTracker = jest.fn((track: Track) => { })
+    const mockSetEditTrack=jest.fn((track: Track) => { })
+    const trackSet: TrackSet = {
+        tracks: [
+            {
+                text: 'track name',
+                tracked: [1641147840000],
+            },
+        ]
+    }
+    render(<TrackList trackSet={trackSet} tracker={mockTracker} setEditTrack={mockSetEditTrack} />)
+    const minusButtonElement = screen.getByRole('button', {name: '&'})
+
+    await user.click(minusButtonElement)
+
+    expect(mockSetEditTrack).toHaveBeenCalledTimes(1)
+    expect(mockSetEditTrack).toHaveBeenCalledWith(trackSet.tracks[0])
 })

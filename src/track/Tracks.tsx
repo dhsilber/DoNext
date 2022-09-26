@@ -17,6 +17,7 @@ const Tracks = () => {
         defaultValue: defaultTrackData
     })
     const [edit, setEdit] = useState(false)
+    const [editTrack, setEditTrack] = useState(emptyTrack)
 
     const save = (track: Track) => {
         setEdit(false)
@@ -27,10 +28,19 @@ const Tracks = () => {
         trackStore(track, trackStorage, setTrackStorage)
     }
 
+    const setEditState = (track: Track) => {
+        setEdit(true)
+        setEditTrack(track)
+    }
+
     return <div className='track'>
         <b>Track:</b>
-        <TrackList trackSet={trackStorage} tracker={tracker} />
-        {edit && <TrackEdit track={emptyTrack} save={save} />}
+        <TrackList
+            trackSet={trackStorage}
+            tracker={tracker}
+            setEditTrack={setEditState}
+        />
+        {edit && <TrackEdit track={editTrack} save={save} />}
         {/* {edit && <TrackEdit project={emptyTrack} save={save} />} */}
         <button onClick={() => setEdit(true)} >+</button>
     </div>

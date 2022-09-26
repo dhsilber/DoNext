@@ -10,23 +10,25 @@ test('has add button', () => {
 })
 
 test('plus button starts edit dialog', async () => {
+    const user =userEvent.setup()
     render(<Events />)
     const element = screen.getByRole('button')
 
-    userEvent.click(element)
+    await user.click(element)
 
     expect(screen.getByText('Done')).toBeInTheDocument
 })
 
-test('done button ends edit dialog', () => {
+test('done button ends edit dialog', async () => {
+    const user =userEvent.setup()
     render(<Events />)
     const element = screen.getByRole('button')
     expect(screen.queryByRole('button', { name: 'Done' })).not.toBeInTheDocument()
-    userEvent.click(element)
+    await user.click(element)
     expect(screen.queryByRole('button', { name: 'Done' })).toBeInTheDocument()
     const doneButton = screen.getByRole('button', { name: 'Done' })
 
-    userEvent.click(doneButton)
+    await user.click(doneButton)
 
     expect(screen.queryByRole('button', { name: 'Done' })).not.toBeInTheDocument()
 })

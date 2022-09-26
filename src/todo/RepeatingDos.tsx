@@ -14,7 +14,7 @@ const RepeatingDos = ({ data }: RepeatingDosProps) => {
         {
             data
                 .filter(todo => todo.done < dayStart)
-                .filter(todo => todo.days.length === 0 || todo.days.find(day => day === today))
+                .filter(todo => todo.days.length === 0 || todo.days.includes(today))
                 .map((todo) => <ToDo key={todo.text} todo={todo} />)
         }
     </ul>

@@ -18,7 +18,8 @@ test('has form contents', () => {
     screen.getByRole('button', { name: 'Done' })
 })
 
-test('done button sends current data to callback', () => {
+test('done button sends current data to callback', async () => {
+    const user = userEvent.setup()
     const mockSave = jest.fn()
     const expectedBeginning = Date.UTC(2022, 8, 9, 4, 8)
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 1))
@@ -28,10 +29,10 @@ test('done button sends current data to callback', () => {
         minutes: 0,
     }
     render(<ProjectEdit project={emptyProject} save={mockSave} />)
-    userEvent.type(screen.getByLabelText('text:'), 'name')
+    await user.type(screen.getByLabelText('text:'), 'name')
     const element = screen.getByRole("button")
 
-    fireEvent.click(element)
+    await user.click(element)
 
     expect(mockSave).toHaveBeenCalledTimes(1)
     expect(mockSave).toHaveBeenCalledWith(expected)
