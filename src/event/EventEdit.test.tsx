@@ -38,7 +38,8 @@ test('has form defaults', () => {
     screen.getByRole('button', { name: 'Done' })
 })
 
-test('done button sends current data to callback', () => {
+test('done button sends current data to callback', async () => {
+    const user = userEvent.setup()
     const mockSave = jest.fn()
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 0))
     const expectedStart = new Date().getTime()
@@ -48,16 +49,17 @@ test('done button sends current data to callback', () => {
         duration: 30 * MinuteMilliseconds,
     }
     render(<EventEdit event={emptyEvent} save={mockSave} />)
-    userEvent.type(screen.getByLabelText('text:'), 'name')
+    await user.type(screen.getByLabelText('text:'), 'name')
     const element = screen.getByRole('button')
 
-    fireEvent.click(element)
+    await user.click(element)
 
     expect(mockSave).toHaveBeenCalledTimes(1)
     expect(mockSave).toHaveBeenCalledWith(expected)
 })
 
-test('done button sends changed date and time to callback', () => {
+test('done button sends changed date and time to callback', async () => {
+    const user = userEvent.setup()
     const mockSave = jest.fn()
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 0))
     const expectedStart = Date.parse('2023-01-03T17:12:00.000-05:00')
@@ -69,32 +71,32 @@ test('done button sends changed date and time to callback', () => {
     render(<EventEdit event={emptyEvent} save={mockSave} />)
 
     const textInput = screen.getByLabelText('text:')
-    userEvent.clear(textInput)
-    userEvent.type(textInput, 'name')
+    await user.clear(textInput)
+    await user.type(textInput, 'name')
 
     const yearInput=screen.getByLabelText('date:')
-    userEvent.clear(yearInput)
-    userEvent.type(yearInput, '2023')
+    await user.clear(yearInput)
+    await user.type(yearInput, '2023')
 
     const monthInput = screen.getAllByLabelText('-')[0]
-    userEvent.clear(monthInput)
-    userEvent.type(monthInput, '01')
+    await user.clear(monthInput)
+    await user.type(monthInput, '01')
 
     const dateInput=screen.getAllByLabelText('-')[1]
-    userEvent.clear(dateInput)
-    userEvent.type(dateInput, '03')
+    await user.clear(dateInput)
+    await user.type(dateInput, '03')
 
     const hourInput=screen.getByLabelText('time:')
-    userEvent.clear(hourInput)
-    userEvent.type(hourInput, '17')
+    await user.clear(hourInput)
+    await user.type(hourInput, '17')
 
     const minuteInput=screen.getByLabelText(':')
-    userEvent.clear(minuteInput)
-    userEvent.type(minuteInput, '12')
+    await user.clear(minuteInput)
+    await user.type(minuteInput, '12')
 
     const element = screen.getByRole('button')
 
-    fireEvent.click(element)
+    await user.click(element)
 
     expect(mockSave).toHaveBeenCalledTimes(1)
     expect(mockSave).toHaveBeenCalledWith(expected)
