@@ -5,6 +5,7 @@ import { Project } from "../DoData"
 import ProjectEdit from "./ProjectEdit"
 
 const emptyProject: Project = {
+    id: 0,
     text: "",
     beginning: 0,
     minutes: 0,
@@ -24,6 +25,7 @@ test('done button sends current data to callback', async () => {
     const expectedBeginning = Date.UTC(2022, 8, 9, 4, 8)
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 1))
     const expected: Project = {
+        id: 0,
         text: 'name',
         beginning: expectedBeginning,
         minutes: 0,
@@ -42,6 +44,7 @@ test('initial data is default', () => {
     const mockSave = jest.fn()
     const expectedBeginning = Date.UTC(2021, 8, 9, 4, 8)
     const expected: Project = {
+        id: 1,
         text: 'name',
         beginning: expectedBeginning,
         minutes: 0,

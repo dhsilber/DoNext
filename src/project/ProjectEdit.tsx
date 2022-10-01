@@ -22,8 +22,12 @@ const ProjectEdit = ({ project, save }: ProjectEditProps) => {
         <br />
         <label>beginning:<input readOnly value={new Date(beginning).toISOString()} /></label>
         <br />
-        <button onClick={() => save({ text: text, beginning: beginning, minutes: 0, })} >Done</button>
-
+        <button onClick={() => save({
+            id: project.id,
+            text: text,
+            beginning: beginning,
+            minutes: 0,
+        })} >Done</button>
     </div>
 }
 

@@ -9,6 +9,8 @@ import { MinuteMilliseconds, TodoStorageKey } from './Constants'
 import Projects from './project/Projects'
 import Notes from './Notes'
 import Tracks from './track/Tracks'
+import Tasks from './task/Tasks'
+import Analyze from './analyze/Analyze'
 
 function App() {
   const [, setStateToForceRerender] = useState(new Date())
@@ -24,7 +26,8 @@ function App() {
 
   return <>
     <div className="App">
-      <div className='analyze'/>
+      <Analyze />
+      <Tasks />
       <Tracks />
       <Events />
       <RepeatingDos data={todoStorage.todos} />

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
 import { ProjectStorageKey } from '../Constants'
-import { Project } from '../DoData'
+import { Project, ProjectSet } from '../DoData'
 import { defaultProjectData } from '../storage/Storage'
 import ProjectEdit from './ProjectEdit'
 import ProjectList from './ProjectList'
 import { projectStore } from './ProjectStore'
 
 const emptyProject: Project = {
+    id: 0,
     text: '',
     beginning: 0,
     minutes: 0,
@@ -29,14 +30,15 @@ const Projects = () => {
         projectStore(project, projectStorage, setProjectStorage)
     }
 
-    const orderedProjects = projectStorage
-        .projects.sort((a, b) => { if (b.minutes > a.minutes) { return -1 } else { return 1 } })
+    const orderedProjectSet: ProjectSet = {
+        projects: projectStorage.projects.sort((a, b) => { if (b.minutes > a.minutes) { return -1 } else { return 1 } }),
+        last_id: projectStorage.last_id,
+    }
 
     return <div className='projects'>
-        <ProjectList projectSet={{ projects: orderedProjects }} tally={tallyMinutes} />
+        <ProjectList projectSet={orderedProjectSet} tally={tallyMinutes} />
         {edit && <ProjectEdit project={emptyProject} save={save} />}
         <button onClick={() => setEdit(true)} >+</button>
-        <button onClick={() => setEdit(true)} >foo</button>
     </div>
 }
 

@@ -6,9 +6,10 @@ test('shows list of projects', () => {
     const mockTally = jest.fn((project: Project) => { })
     const projectSet: ProjectSet = {
         projects: [
-            { text: 'project name', beginning: 123, minutes: 0, },
-            { text: 'other project', beginning: 124, minutes: 0, },
-        ]
+            { id: 1,text: 'project name', beginning: 123, minutes: 0, },
+            { id: 2,text: 'other project', beginning: 124, minutes: 0, },
+        ],
+        last_id:2,
     }
     render(<ProjectList projectSet={projectSet} tally={mockTally} />)
 
@@ -20,9 +21,10 @@ test('each project has a checkbox', () => {
     const mockTally = jest.fn((project: Project) => { })
     const projectSet: ProjectSet = {
         projects: [
-            { text: 'project name', beginning: 123, minutes: 0, },
-            { text: 'other project', beginning: 124, minutes: 0, },
-        ]
+            { id: 1,text: 'project name', beginning: 123, minutes: 0, },
+            { id: 2,text: 'other project', beginning: 124, minutes: 0, },
+        ],
+        last_id:2,
     }
     render(<ProjectList projectSet={projectSet} tally={mockTally} />)
 
@@ -35,11 +37,13 @@ test('each project shows accumulated time and start date', () => {
     const projectSet: ProjectSet = {
         projects: [
             {
+                id: 1,
                 text: 'project name',
                 beginning: 1663511820000,
                 minutes: 0,
             },
-        ]
+        ],
+        last_id:1,
     }
     render(<ProjectList projectSet={projectSet} tally={mockTally} />)
 

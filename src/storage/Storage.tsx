@@ -1,8 +1,8 @@
 import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
-import { EventStorageKey, TodoStorageKey } from '../Constants'
-import { EventSet, TodoSet, ProjectSet, TrackSet } from '../DoData'
+import { EventStorageKey, ProjectStorageKey, TaskStorageKey, TodoStorageKey, TrackStorageKey } from '../Constants'
+import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
@@ -40,11 +40,17 @@ export const defaultEventData: EventSet = {
 }
 
 export const defaultProjectData: ProjectSet = {
-    projects: []
+    projects: [],
+    last_id: 0,
 }
 
 export const defaultTrackData: TrackSet = {
     tracks: []
+}
+
+export const defaultTaskData: TaskSet = {
+    tasks: [],
+    last_id: 0,
 }
 
 const Storage = () => {
@@ -57,10 +63,25 @@ const Storage = () => {
         defaultValue: defaultEventData
     })
 
+    const [taskStorage, setTaskStorage] = useLocalStorageState(TaskStorageKey, {
+        defaultValue: defaultTaskData
+    })
+
+    const [trackStorage, setTrackStorage] = useLocalStorageState(TrackStorageKey, {
+        defaultValue: defaultEventData
+    })
+
+    const [projectStorage, setProjectStorage] = useLocalStorageState(ProjectStorageKey, {
+        defaultValue: defaultProjectData
+    })
+
     const todoData = JSON.stringify(todoStorage, null, 2)
     const eventData = JSON.stringify(eventStorage, null, 2)
+    const taskData = JSON.stringify(taskStorage, null, 2)
+    const trackData = JSON.stringify(trackStorage, null, 2)
+    const projectData = JSON.stringify(projectStorage, null, 2)
 
-    return <div className='storage'>
+    return <>
         <div className='storageTodo'>
             <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
@@ -71,7 +92,22 @@ const Storage = () => {
             <LoadData setData={setEventStorage} prompt={"Ingest events:"} />
             <UnloadData jsonData={eventData} prompt={"Download events"} fileName='doNextEventsDownload.json' />
         </div>
-    </div>
+        <div className='storageTask'>
+            <h3>Tasks Storage</h3>
+            <LoadData setData={setTaskStorage} prompt={"Ingest tasks:"} />
+            <UnloadData jsonData={taskData} prompt={"Download tasks"} fileName='doNextTasksDownload.json' />
+        </div>
+        <div className='storageTrack'>
+            <h3>Tracks Storage</h3>
+            <LoadData setData={setTrackStorage} prompt={"Ingest tracks:"} />
+            <UnloadData jsonData={trackData} prompt={"Download tracks"} fileName='doNextTracksDownload.json' />
+        </div>
+        <div className='storageProject'>
+            <h3>Projects Storage</h3>
+            <LoadData setData={setProjectStorage} prompt={"Ingest projects:"} />
+            <UnloadData jsonData={projectData} prompt={"Download projects"} fileName='doNextProjectsDownload.json' />
+        </div>
+    </>
 }
 
 export default Storage
