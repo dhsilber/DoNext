@@ -9,7 +9,8 @@ export const trackStore = (
         return
     }
 
-    const existingTrack = allTracks.tracks.find(item => item.text === track.text)
+    const existingTrack = allTracks.tracks
+        .find(item => item.text === track.text)
     if (existingTrack === undefined) {
         allTracks.tracks.push(track)
     }

@@ -1,12 +1,12 @@
 .App {
   display: grid;
   grid-template-areas:
-    "notes notes analyze"
-    "notes notes track"
-    "notes notes events"
-    "notes notes todo"
-    "notes notes projects"
-    "storageTodo storageEvent projects";
+    "notes notes todo analyze"
+    "notes notes storageTodo analyze"
+    "notes notes tasks track"
+    "notes notes storageTask storageTrack"
+    "notes notes projects events"
+    "notes notes storageProject storageEvent";
   background-color: #282c34;
   gap: 2px;
 }
@@ -23,6 +23,11 @@
 .track {
   grid-area: track;
   background-color: #338ef0;
+}
+
+.tasks {
+  grid-area: tasks;
+  background-color: #90b1f3;
 }
 
 .events {
@@ -52,5 +57,20 @@
 
 .storageEvent {
   grid-area: storageEvent;
+  background-color: #90b1f3;
+}
+
+.storageProject {
+  grid-area: storageProject;
+  background-color: #90b1f3;
+}
+
+.storageTask {
+  grid-area: storageTask;
+  background-color: #90b1f3;
+}
+
+.storageTrack {
+  grid-area: storageTrack;
   background-color: #90b1f3;
 }

@@ -41,7 +41,6 @@ const Tracks = () => {
             setEditTrack={setEditState}
         />
         {edit && <TrackEdit track={editTrack} save={save} />}
-        {/* {edit && <TrackEdit project={emptyTrack} save={save} />} */}
         <button onClick={() => setEdit(true)} >+</button>
     </div>
 }

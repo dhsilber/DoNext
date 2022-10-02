@@ -27,6 +27,7 @@ export interface EventSet {
 }
 
 export interface Project {
+    id: number
     text: string
     beginning: number
     minutes: number
@@ -34,6 +35,7 @@ export interface Project {
 
 export interface ProjectSet {
     projects: Project[]
+    last_id: number
 }
 
 export interface Track {
@@ -43,6 +45,20 @@ export interface Track {
 
 export interface TrackSet {
     tracks: Track[]
+}
+
+export interface Task {
+    id: number
+    text: string
+    details: string
+    archived: number
+    project: number
+    time: number
+}
+
+export interface TaskSet {
+    tasks: Task[]
+    last_id: number
 }
 
 
