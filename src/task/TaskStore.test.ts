@@ -6,6 +6,8 @@ const emptyTask: Task = {
     text: '',
     details: '',
     archived: 0,
+    project: 0,
+    time: 0,
 }
 
 const emptyTaskSet: TaskSet = {
@@ -23,9 +25,23 @@ test('does not store if there is no text content', () => {
 
 test('stores new content', () => {
     const mockSetStore = jest.fn()
-    const newTask: Task = { id: 0, text: 'a', details: 'a stuff', archived: 0 }
+    const newTask: Task = {
+        id: 0,
+        text: 'a',
+        details: 'a stuff',
+        archived: 0,
+        project: 0,
+        time: 0,
+    }
     const expected: TaskSet = {
-        tasks: [{ id: 1, text: 'a', details: 'a stuff', archived: 0 }],
+        tasks: [{
+            id: 1,
+            text: 'a',
+            details: 'a stuff',
+            archived: 0,
+            project: 0,
+            time: 0,
+        }],
         last_id: 1,
     }
 
@@ -40,17 +56,33 @@ test('updates existing content', () => {
         id: 1,
         text: 'a redux',
         details: 'different stuff here',
-        archived: someTime
+        archived: someTime,
+        project: 0,
+        time: 0,
     }
     const initial: TaskSet = {
         tasks: [
-            { id: 1, text: 'a', details: 'a stuff', archived: 0 }
+            {
+                id: 1,
+                text: 'a',
+                details: 'a stuff',
+                archived: 0,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 1,
     }
     const expected: TaskSet = {
         tasks: [
-            { id: 1, text: 'a redux', details: 'different stuff here', archived: someTime }
+            {
+                id: 1,
+                text: 'a redux',
+                details: 'different stuff here',
+                archived: someTime,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 1,
     }
@@ -66,18 +98,41 @@ test('will store multiple tasks with the same text', () => {
         id: 0,
         text: 'a',
         details: 'different stuff here',
-        archived: 0
+        archived: 0,
+        project: 0,
+        time: 0,
     }
     const initial: TaskSet = {
         tasks: [
-            { id: 1, text: 'a', details: 'a stuff', archived: 0 }
+            {
+                id: 1,
+                text: 'a',
+                details: 'a stuff',
+                archived: 0,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 1,
     }
     const expected: TaskSet = {
         tasks: [
-            { id: 1, text: 'a', details: 'a stuff', archived: 0 },
-            { id: 2, text: 'a', details: 'different stuff here', archived: 0 }
+            {
+                id: 1,
+                text: 'a',
+                details: 'a stuff',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2,
+                text: 'a',
+                details: 'different stuff here',
+                archived: 0,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 2,
     }
@@ -93,18 +148,41 @@ test('if id does not match existing record store it', () => {
         id: 7,
         text: 'a',
         details: 'different stuff here',
-        archived: 0
+        archived: 0,
+        project: 0,
+        time: 0,
     }
     const initial: TaskSet = {
         tasks: [
-            { id: 1, text: 'a', details: 'a stuff', archived: 0 }
+            {
+                id: 1,
+                text: 'a',
+                details: 'a stuff',
+                archived: 0,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 1,
     }
     const expected: TaskSet = {
         tasks: [
-            { id: 1, text: 'a', details: 'a stuff', archived: 0 },
-            { id: 2, text: 'a', details: 'different stuff here', archived: 0 }
+            {
+                id: 1,
+                text: 'a',
+                details: 'a stuff',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2,
+                text: 'a',
+                details: 'different stuff here',
+                archived: 0,
+                project: 0,
+                time: 0,
+            }
         ],
         last_id: 2,
     }

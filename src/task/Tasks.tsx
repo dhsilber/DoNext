@@ -12,6 +12,8 @@ const emptyTask: Task = {
     text: '',
     details: '',
     archived: 0,
+    project: 0,
+    time: 0,
 }
 
 const Tasks = () => {

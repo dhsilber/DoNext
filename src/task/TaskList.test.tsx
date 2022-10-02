@@ -7,8 +7,16 @@ import TaskList from "./TaskList"
 test('shows list of tasks', () => {
     const taskSet: TaskSet = {
         tasks: [
-            { id: 1, text: 'project name', details: 'notes', archived: 0, },
-            { id: 2, text: 'other project', details: 'ideas', archived: 0, },
+            {
+                id: 1, text: 'project name', details: 'notes', archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2, text: 'other project', details: 'ideas', archived: 0,
+                project: 0,
+                time: 0,
+            },
         ],
         last_id: 2,
     }
@@ -23,8 +31,22 @@ test('does not show archived tasks', () => {
     const currentTime = Date.now()
     const taskSet: TaskSet = {
         tasks: [
-            { id: 1, text: 'project name', details: 'notes', archived: 0, },
-            { id: 2, text: 'other project', details: 'ideas', archived: currentTime, },
+            {
+                id: 1,
+                text: 'project name',
+                details: 'notes',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2,
+                text: 'other project',
+                details: 'ideas',
+                archived: currentTime,
+                project: 0,
+                time: 0,
+            },
         ],
         last_id: 2,
     }
@@ -37,8 +59,22 @@ test('does not show archived tasks', () => {
 test('each task has a checkbox', () => {
     const taskSet: TaskSet = {
         tasks: [
-            { id: 1, text: 'project name', details: 'notes', archived: 0, },
-            { id: 2, text: 'other project', details: 'ideas', archived: 0, },
+            {
+                id: 1,
+                text: 'project name',
+                details: 'notes',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2,
+                text: 'other project',
+                details: 'ideas',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
         ],
         last_id: 2,
     }
@@ -53,7 +89,14 @@ test('clicking a & button edits that track', async () => {
     const mockSetEditTask = jest.fn((task: Task) => { })
     const taskSet: TaskSet = {
         tasks: [
-            { id: 1, text: 'project name', details: 'notes', archived: 0, },
+            {
+                id: 1,
+                text: 'project name',
+                details: 'notes',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
         ],
         last_id: 1,
     }

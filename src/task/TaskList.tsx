@@ -14,7 +14,7 @@ const TaskList = ({ taskSet, save, setEditTask }: TaskListProps) => {
             .filter(task => task.archived === 0)
             .map((task) => {
                 return <TaskListElement
-                    key={task.text}
+                    key={'task' + task.id}
                     task={task}
                     save={save}
                     setEditTask={setEditTask}

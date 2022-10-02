@@ -52,6 +52,8 @@ export interface Task {
     text: string
     details: string
     archived: number
+    project: number
+    time: number
 }
 
 export interface TaskSet {
