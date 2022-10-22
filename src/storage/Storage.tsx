@@ -17,26 +17,33 @@ export const defaultToDoData: TodoSet = {
 export const defaultEventData: EventSet = {
     routine: [
         {
+            id: 1,
             text: "Sleep",
+            days:[],
             start: 82800000,
             duration: 26400000
         },
         {
+            id: 2,
             text: "Work - morning",
+            days:[],
             start: 30600000,
             duration: 14400000
         },
         {
+            id: 3,
             text: "Work - afternoon",
+            days:[],
             start: 48600000,
             duration: 14400000
         }
     ],
     events: [
-        { text: "Download default configuration", start: 0, duration: 0 },
-        { text: "Edit to make it yours", start: 0, duration: 0 },
-        { text: "Ingest your data", start: 0, duration: 0 },
-    ]
+        { id: 4, text: "Download default configuration", start: 0, duration: 0 },
+        { id: 5, text: "Edit to make it yours", start: 0, duration: 0 },
+        { id: 6, text: "Ingest your data", start: 0, duration: 0 },
+    ],
+    last_event_id: 6,
 }
 
 export const defaultProjectData: ProjectSet = {

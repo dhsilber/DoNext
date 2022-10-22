@@ -45,9 +45,12 @@ const EventEdit = ({ event, save }: EventEditProps) => {
                 + `:${minutes.padStart(2, '0')}`
                 + `:00.000`
             const start = Date.parse(dateString)
-            save(
-                { text: text, start: start, duration: Number(duration) * MinuteMilliseconds, }
-            )
+            save({
+                id: event.id,
+                text: text,
+                start: start,
+                duration: Number(duration) * MinuteMilliseconds,
+            })
         }} >Done</button>
 
     </div>

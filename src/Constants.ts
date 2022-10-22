@@ -9,5 +9,6 @@ export const HourMilliseconds = 60 * MinuteMilliseconds
 export const DayMilliseconds = 24 * HourMilliseconds
 
 export const NO_ELEMENT_FOUND = -1
+export const UNSET = Number.MIN_SAFE_INTEGER
 
 export const NowMarker = "<-------------------- Now --------------------<"

@@ -24,7 +24,6 @@ export const taskStore = (
             return
         }
         else {
-            console.log(`Replacing task ${task.id} at index ${existingTaskIndex}`)
             allTasks.tasks.splice(existingTaskIndex, 1, task)
         }
     }

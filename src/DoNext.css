@@ -1,12 +1,10 @@
 .App {
   display: grid;
   grid-template-areas:
-    "notes notes todo analyze"
-    "notes notes storageTodo analyze"
-    "notes notes tasks track"
-    "notes notes storageTask storageTrack"
-    "notes notes projects events"
-    "notes notes storageProject storageEvent";
+    "todo tasks events"
+    "storageTodo storageTask storageEvent"
+    "track projects analyze"
+    "storageTrack storageProject analyze";
   background-color: #282c34;
   gap: 2px;
 }

@@ -7,7 +7,6 @@ import { defaultToDoData } from './storage/Storage'
 import Storage from './storage/Storage'
 import { MinuteMilliseconds, TodoStorageKey } from './Constants'
 import Projects from './project/Projects'
-import Notes from './Notes'
 import Tracks from './track/Tracks'
 import Tasks from './task/Tasks'
 import Analyze from './analyze/Analyze'
@@ -26,13 +25,13 @@ function App() {
 
   return <>
     <div className="App">
+      App.tsx
       <Analyze />
       <Tasks />
       <Tracks />
       <Events />
       <RepeatingDos data={todoStorage.todos} />
       <Storage />
-      <Notes />
       <Projects />
     </div>
   </>

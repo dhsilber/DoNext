@@ -1,11 +1,11 @@
-import { DayMilliseconds, HourMilliseconds, NowMarker } from '../Constants'
+import { DayMilliseconds, HourMilliseconds, NowMarker, UNSET } from '../Constants'
 import { dayTimestampStartMilliseconds } from '../DateUtilities'
 import { EventSet, Event } from '../DoData'
 
 const eventSorter = (source: EventSet) => {
-
     const startTime = Date.now() - 2 * HourMilliseconds
     const endTime = Date.now() + 48 * HourMilliseconds
+    const today = new Date().getDay()
 
     const routineSchedule = source.routine
 
@@ -16,9 +16,13 @@ const eventSorter = (source: EventSet) => {
     }
 
     const constructedEvents = midnights.flatMap((midnight) => {
+        const day = new Date(midnight).getDay()
         let routineEvents: Event[] = []
-        routineSchedule.forEach((routine) => {
+        routineSchedule
+        .filter(routine => routine.days.length === 0 || routine.days.includes(day))
+        .forEach((routine) => {
             let event: Event = {
+                id: routine.id,
                 text: routine.text,
                 start: midnight + routine.start,
                 duration: routine.duration
@@ -27,9 +31,10 @@ const eventSorter = (source: EventSet) => {
         })
         return routineEvents
     })
-    constructedEvents.push({text: NowMarker,duration:0,start: Date.now()})
+    constructedEvents.push({ id: UNSET, text: NowMarker, duration: 0, start: Date.now() })
 
-    const currentEvents = constructedEvents.concat(source.events)
+    const currentEvents = constructedEvents
+        .concat(source.events)
         .sort((a, b) => { if (b.start > a.start) { return -1 } else { return 1 } })
         .filter(event => (event.start + event.duration) > startTime && event.start < endTime)
 
