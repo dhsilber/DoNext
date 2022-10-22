@@ -5,16 +5,45 @@ test('stores a new event', () => {
     const mockStore = jest.fn()
     const initialEventSet: EventSet = {
         routine: [],
-        events: []
+        events: [],
+        last_event_id: 0,
     }
     const event: Event = {
+        id: 0,
         text: 'new event',
         start: 123,
         duration: 0,
     }
+    const expectedEvent = { ...event, id: 1 }
     const expectedEventSet: EventSet = {
         routine: [],
-        events: [event]
+        events: [expectedEvent],
+        last_event_id: 1,
+    }
+
+    eventStore(event, initialEventSet, mockStore)
+
+    expect(mockStore).toHaveBeenCalledWith(expectedEventSet)
+})
+
+test('stores a new event when provided with an event id that does not exist', () => {
+    const mockStore = jest.fn()
+    const initialEventSet: EventSet = {
+        routine: [],
+        events: [],
+        last_event_id: 0,
+    }
+    const event: Event = {
+        id: 1000,
+        text: 'new event',
+        start: 123,
+        duration: 0,
+    }
+    const expectedEvent = { ...event, id: 1 }
+    const expectedEventSet: EventSet = {
+        routine: [],
+        events: [expectedEvent],
+        last_event_id: 1,
     }
 
     eventStore(event, initialEventSet, mockStore)
@@ -26,9 +55,11 @@ test('does not store a event with an empty name', () => {
     const mockStore = jest.fn()
     const initialEventSet: EventSet = {
         routine: [],
-        events: []
+        events: [],
+        last_event_id: 0,
     }
     const event: Event = {
+        id: 1,
         text: '',
         start: 123,
         duration: 0,
@@ -43,16 +74,19 @@ test('updates an existing event', () => {
     const mockStore = jest.fn()
     const initialEventSet: EventSet = {
         routine: [],
-        events: [{ text: 'event', start: 123, duration: 0 }]
+        events: [{ id: 1, text: 'event', start: 123, duration: 0 }],
+        last_event_id: 1,
     }
     const event: Event = {
+        id: 1,
         text: 'event',
-        start: 123,
+        start: 127,
         duration: 15,
     }
     const expectedEventSet: EventSet = {
         routine: [],
-        events: [event]
+        events: [event],
+        last_event_id: 1,
     }
 
     eventStore(event, initialEventSet, mockStore)

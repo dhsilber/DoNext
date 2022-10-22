@@ -10,13 +10,16 @@ export interface TodoSet {
 }
 
 export interface Event {
+    id: number
     text: string
     start: number 
     duration: number
 }
 
 export interface Routine {
+    id: number
     text: string
+    days: number[]
     start: number 
     duration: number
 }
@@ -24,6 +27,7 @@ export interface Routine {
 export interface EventSet {
     routine: Routine[]
     events: Event[]
+    last_event_id: number
 }
 
 export interface Project {

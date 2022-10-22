@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event'
 import { MinuteMilliseconds } from '../Constants'
 
 const emptyEvent: Event = {
+    id: 0,
     text: '',
     start: 0,
     duration: 0,
@@ -44,6 +45,7 @@ test('done button sends current data to callback', async () => {
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 0))
     const expectedStart = new Date().getTime()
     const expected: Event = {
+        id: 0,
         text: 'name',
         start: expectedStart,
         duration: 30 * MinuteMilliseconds,
@@ -64,6 +66,7 @@ test('done button sends changed date and time to callback', async () => {
     MockDate.set(Date.UTC(2022, 8, 9, 4, 8, 0))
     const expectedStart = Date.parse('2023-01-03T17:12:00.000-05:00')
     const expected: Event = {
+        id: 0,
         text: 'name',
         start: expectedStart,
         duration: 30 * MinuteMilliseconds,

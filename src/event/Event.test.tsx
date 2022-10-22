@@ -1,11 +1,12 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { Event } from '../DoData'
 import EventElement from './EventElement'
 
-const data = [
-  { text: "demo event", start: 1663025400000,     duration: 900000 },
-  { text: "another event", start: 1663104600000, duration: 8220000 },
-  { text: "third event", start: 1663112820000, duration: 780000 },
+const data: Event[] = [
+  { id: 1, text: "demo event", start: 1663025400000, duration: 900000 },
+  { id: 2, text: "another event", start: 1663104600000, duration: 8220000 },
+  { id: 3, text: "third event", start: 1663112820000, duration: 780000 },
 ]
 
 test('Renders single event', () => {

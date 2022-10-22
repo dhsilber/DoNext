@@ -9,6 +9,7 @@ import EventEdit from './EventEdit'
 import { eventStore } from './EventStore'
 
 const emptyEvent: Event = {
+    id: 0,
     text: "",
     start: 0,
     duration: 0,
