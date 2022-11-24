@@ -5,7 +5,6 @@ import { EventSet, Event } from '../DoData'
 const eventSorter = (source: EventSet) => {
     const startTime = Date.now() - 2 * HourMilliseconds
     const endTime = Date.now() + 48 * HourMilliseconds
-    const today = new Date().getDay()
 
     const routineSchedule = source.routine
 

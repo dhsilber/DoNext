@@ -14,7 +14,7 @@ const ToDo = ({ todo }: ToDoProps) => {
         defaultValue: defaultToDoData
     })
 
-    return <li >
+    return <li>
         <input
             type="checkbox"
             onClick={(event) => { checker(todo, todoStorage, setTodoStorage) }}

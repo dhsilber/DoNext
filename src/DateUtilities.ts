@@ -1,10 +1,10 @@
-import { MinuteMilliseconds } from "./Constants"
+import { DayMilliseconds, MinuteMilliseconds } from "./Constants"
 
-const commonDayStart = (now: Date) => {
-    const nowYear = now.getFullYear()
-    const nowMonthIndex = now.getMonth()
-    const nowMonthDay = now.getDate()
-    const nowTimeZoneOffset = now.getTimezoneOffset() * MinuteMilliseconds
+const commonDayStart = (date: Date) => {
+    const nowYear = date.getFullYear()
+    const nowMonthIndex = date.getMonth()
+    const nowMonthDay = date.getDate()
+    const nowTimeZoneOffset = date.getTimezoneOffset() * MinuteMilliseconds
     const dayStart = Date.UTC(nowYear, nowMonthIndex, nowMonthDay) + nowTimeZoneOffset
     return dayStart
 }
@@ -15,8 +15,23 @@ export const dayNowStartMilliseconds = () => {
 }
 
 export const dayTimestampStartMilliseconds = (timestamp: number) => {
-    const now = new Date(timestamp)
-    return commonDayStart(now)
+    const date = new Date(timestamp)
+    return commonDayStart(date)
+}
+
+export const weekStartMilliseconds = (): number[] => {
+    const weekStarts: number[] = []
+    const now = new Date()
+    let dayStart = commonDayStart(now)
+    const today = new Date().getDay()
+    for (let day = today; day >= 0; day--, dayStart -= DayMilliseconds) {
+        weekStarts[day] = dayStart
+    }
+    for (let day = 6; day > today; day--, dayStart -= DayMilliseconds) {
+        weekStarts[day] = dayStart
+    }
+
+    return weekStarts
 }
 
 export const datestampToMinute = (): number => {
