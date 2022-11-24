@@ -7,7 +7,7 @@ jest.mock('./Checker')
 
 it('displays name of todo', () => {
     const name = "Text of todo"
-    const data: Todo = { text: name, done: 0, days: [] }
+    const data: Todo = { text: name, done: 0, days: [], persist: false }
 
     render(<ToDo todo={data} />)
 
@@ -16,7 +16,7 @@ it('displays name of todo', () => {
 
 it('displays checkbox', () => {
     const name = "Text of todo"
-    const data: Todo = { text: name, done: 0, days: [] }
+    const data: Todo = { text: name, done: 0, days: [], persist: false }
 
     render(<ToDo todo={data} />)
 
@@ -26,7 +26,7 @@ it('displays checkbox', () => {
 it('checking box stores timestamp', () => {
     const mockChecker = jest.fn()
     const name = "Text of todo"
-    const data: Todo = { text: name, done: 0, days: [] }
+    const data: Todo = { text: name, done: 0, days: [], persist: false }
 
     render(<ToDo todo={data} />)
 

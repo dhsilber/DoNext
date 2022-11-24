@@ -8,15 +8,15 @@ afterEach(() => {
 
 it('checker', () => {
     MockDate.set(1234)
-    const todo: Todo = { text: "test text", done: 0, days: [] }
-    const todoList: Todo[] = [todo, { text: "hi", done: 0, days: [] }]
+    const todo: Todo = { text: "test text", done: 0, days: [], persist: false }
+    const todoList: Todo[] = [todo, { text: "hi", done: 0, days: [], persist: false }]
     const allData = { todos: todoList }
     const mockStore = jest.fn()
     const exptectedTodoData: TodoSet = {
         todos:
             [
-                { text: "test text", done: 1234, days: [] },
-                { text: "hi", done: 0, days: [] }
+                { text: "test text", done: 1234, days: [], persist: false },
+                { text: "hi", done: 0, days: [], persist: false }
             ]
     }
 

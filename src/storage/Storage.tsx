@@ -8,9 +8,9 @@ import UnloadData from '../UnloadData'
 
 export const defaultToDoData: TodoSet = {
     todos: [
-        { text: "Download default configuration", done: 0, days: [] },
-        { text: "Edit to make it yours", done: 0, days: [] },
-        { text: "Ingest your data", done: 0, days: [] },
+        { text: "Download default configuration", done: 0, days: [], persist: false },
+        { text: "Edit to make it yours", done: 0, days: [], persist: false },
+        { text: "Ingest your data", done: 0, days: [], persist: false },
     ]
 }
 

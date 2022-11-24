@@ -10,7 +10,7 @@ export const eventStore = (
         return
     }
 
-    if (0 == event.id) {
+    if (0 === event.id) {
         event.id = allEvents.last_event_id + 1
         allEvents.events.push(event)
         allEvents.last_event_id += 1
@@ -18,7 +18,7 @@ export const eventStore = (
     else {
         const existingEventIndex = allEvents.events
             .findIndex(item => item.id === event.id)
-        if (NO_ELEMENT_FOUND == existingEventIndex) {
+        if (NO_ELEMENT_FOUND === existingEventIndex) {
             event.id = 0
             eventStore(event, allEvents, setStore)
             return

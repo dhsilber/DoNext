@@ -3,6 +3,7 @@ export interface Todo {
     text: string
     done: number
     days: number[]
+    persist: boolean
 }
 
 export interface TodoSet {
