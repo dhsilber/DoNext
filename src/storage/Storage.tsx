@@ -20,22 +20,28 @@ export const defaultEventData: EventSet = {
             id: 1,
             text: "Sleep",
             days:[],
-            start: 82800000,
-            duration: 26400000
+//            start: 82800000,
+            start: 2300,
+//            duration: 26400000,
+            duration: 700,
         },
         {
             id: 2,
             text: "Work - morning",
             days:[],
-            start: 30600000,
-            duration: 14400000
+//            start: 30600000,
+            start: 830,
+            duration: 400
+//            duration: 14400000
         },
         {
             id: 3,
             text: "Work - afternoon",
             days:[],
-            start: 48600000,
-            duration: 14400000
+//            start: 48600000,
+            start: 1330,
+//            duration: 14400000
+            duration: 400
         }
     ],
     events: [

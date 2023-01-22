@@ -60,3 +60,12 @@ export const formatDate = (dateTime: Date) => {
         + `:${minutes.padStart(2, '0')}`
     return dateString
 }
+
+export const humanTimeToMillisecondsSinceMidnight = (humanTime: number) => {
+    if (humanTime > 2400) return humanTime
+
+    const hours = Math.trunc( humanTime / 100 )
+    const minutes = humanTime % 100
+
+return (hours * 60 + minutes) * MinuteMilliseconds
+}
