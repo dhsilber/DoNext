@@ -1,5 +1,5 @@
 import { DayMilliseconds, HourMilliseconds, NowMarker, UNSET } from '../Constants'
-import { dayTimestampStartMilliseconds } from '../DateUtilities'
+import { dayTimestampStartMilliseconds, humanTimeToMillisecondsSinceMidnight } from '../DateUtilities'
 import { EventSet, Event } from '../DoData'
 
 const eventSorter = (source: EventSet) => {
@@ -18,16 +18,16 @@ const eventSorter = (source: EventSet) => {
         const day = new Date(midnight).getDay()
         let routineEvents: Event[] = []
         routineSchedule
-        .filter(routine => routine.days.length === 0 || routine.days.includes(day))
-        .forEach((routine) => {
-            let event: Event = {
-                id: routine.id,
-                text: routine.text,
-                start: midnight + routine.start,
-                duration: routine.duration
-            }
-            routineEvents.push(event)
-        })
+            .filter(routine => routine.days.length === 0 || routine.days.includes(day))
+            .forEach((routine) => {
+                let event: Event = {
+                    id: routine.id,
+                    text: routine.text,
+                    start: midnight + humanTimeToMillisecondsSinceMidnight( routine.start ),
+                    duration: humanTimeToMillisecondsSinceMidnight( routine.duration)
+                }
+                routineEvents.push(event)
+            })
         return routineEvents
     })
     constructedEvents.push({ id: UNSET, text: NowMarker, duration: 0, start: Date.now() })
