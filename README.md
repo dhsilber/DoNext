@@ -4,13 +4,6 @@
 
 It does this by tracking my routine, scheduled events, todo list, and projects. (Tasks needs to be added.)
 
-Data is stored in the browser's local storage, so they are instantly available when the app is reloaded.
-This data can be loaded from files and downloaded as well.
-
-It does not yet:
-- highlight next tasks
-- show events from my Google calendar
-
 The repeating todos are all about building habits. 
 It feels good to check them off my list every day, but ideally I'll do them even without the reminders.
 
@@ -36,3 +29,9 @@ Next things for this app are:
 - Filter todo items by day of month
 - Display Google Calendar Events for today
 - *DoNext* should know work hours and highlight conflicts between calendar events and work hours
+
+I started this with just a desktop web app, but I have found that I really want my list on my phone, so I'm 
+starting up a React Native app.
+Hopefully much of the existing code is usable in the new platform.
+
+Both [the initial React project](react/do-next) and [the new React Native project](native/do-next) are in this repository.
