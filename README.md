@@ -34,4 +34,4 @@ I started this with just a desktop web app, but I have found that I really want 
 starting up a React Native app.
 Hopefully much of the existing code is usable in the new platform.
 
-Both [the initial React project](react/do-next) and [the new React Native project](native/do-next) are in this repository.
+Both [the initial React project](react/do-next) and [the new React Native project](native/do-next) will be in this repository.
