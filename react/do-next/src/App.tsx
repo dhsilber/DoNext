@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import './DoNext.css'
+import { Routes, Route, Outlet, Link, BrowserRouter } from "react-router-dom"
+import DoNext from './DoNext'
 import RepeatingDos from './todo/RepeatingDos'
 import useLocalStorageState from 'use-local-storage-state'
 import Events from './event/Events'
@@ -10,30 +11,20 @@ import Projects from './project/Projects'
 import Tracks from './track/Tracks'
 import Tasks from './task/Tasks'
 import Analyze from './analyze/Analyze'
+import Edit from './Edit'
 
 function App() {
-  const [, setStateToForceRerender] = useState(new Date())
-  const [todoStorage] = useLocalStorageState(TodoStorageKey, {
-    defaultValue: defaultToDoData
-  })
-
-  useEffect(() => {
-    setInterval(() => {
-      setStateToForceRerender(new Date())
-    }, MinuteMilliseconds)
-  }, [])
-
   return <>
-    <div className="App">
-      App.tsx
-      <Analyze />
-      <Tasks />
-      <Tracks />
-      <Events />
-      <RepeatingDos data={todoStorage.todos} />
-      <Storage />
-      <Projects />
-    </div>
+  <div>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" >
+        <Route index element={<DoNext />} />
+        <Route path="edit" element={<Edit />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+  </div>                                                  
   </>
 }
 

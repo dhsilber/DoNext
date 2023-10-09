@@ -11,6 +11,7 @@ node_modules
 
 # production
 /build
+build/
 
 # misc
 .DS_Store
@@ -41,3 +42,7 @@ web-build/
 
 private
 Private.kt
+
+react/do-next/node_modules/
+react/do-next/build/
+
