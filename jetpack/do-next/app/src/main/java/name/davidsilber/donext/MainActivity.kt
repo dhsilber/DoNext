@@ -5,10 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
@@ -51,12 +48,16 @@ fun DoNextList(doList: List<DoItem>) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(doList) { item -> DoNextItem(item, resetCounter, showDoneItems) }
         }
-        Row {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth().padding(8.dp)
+        ) {
             Button(onClick = { resetCounter += 1 }) {
-
+                Text(text = "Reset")
             }
+//            Spacer(modifier = Modifier.padding(horizontal = 4.dp))
             Button(onClick = { showDoneItems = !showDoneItems }) {
-
+                Text(text = if (showDoneItems) "Hide Done Items" else "Show Done Items")
             }
         }
     }

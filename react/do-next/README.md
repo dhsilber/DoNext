@@ -27,7 +27,8 @@ OTOH, things that block tasks might themselves be tasks. ("Buy nails for birdhou
 
 To start: `npm start`
 To test: `npm test`
-For local use: `serve -s build -l 4000`
+
+For local use: `npm install serve`, then: `serve -s build -l 4000`
 
 I skimped on the testing of the storage because it is a hard problem.
 Testing that code would be very useful, but first I want to see that the project has the merit of being more useful to me than other solutions.
