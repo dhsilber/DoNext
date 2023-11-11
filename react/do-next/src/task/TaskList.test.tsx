@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event"
 import MockDate from 'mockdate'
 import { Task, TaskSet } from "../DoData"
 import TaskList from "./TaskList"
+import '@testing-library/jest-dom/extend-expect'
 
 test('shows list of tasks', () => {
     const taskSet: TaskSet = {
@@ -84,6 +85,44 @@ test('each task has a checkbox', () => {
     expect(screen.getByRole('checkbox', { name: 'other project' })).toBeInTheDocument()
 })
 
+test('first task is highlighted', () => {
+    // I would prefer that this test checks the style rather than the class, but
+    // the @testing-library/jest-dom toHaveStyle() matcher requires that we somehow
+    // connect the style with the document for the component under test and there is
+    // no clear way to do so.
+    //
+    // See https://github.com/testing-library/jest-dom/issues/350#issuecomment-805040271
+    //
+    // Perhaps if this project is converted to something other than create-react-app
+    // (which is no longer maintained) there would be a path forward.
+    const taskSet: TaskSet = {
+        tasks: [
+            {
+                id: 1,
+                text: 'project name',
+                details: 'notes',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+            {
+                id: 2,
+                text: 'other project',
+                details: 'ideas',
+                archived: 0,
+                project: 0,
+                time: 0,
+            },
+        ],
+        last_id: 2,
+    }
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} />)
+
+    expect(screen.getByText('project name')).toHaveClass('current-task')
+    expect(screen.getByText('other project')).not.toHaveClass('current-task')
+    // expect(screen.getByText('other project')).toHaveStyle('background-color: #90b1f3;')
+})
+
 test('clicking a & button edits that track', async () => {
     const user = userEvent.setup()
     const mockSetEditTask = jest.fn((task: Task) => { })
@@ -108,3 +147,4 @@ test('clicking a & button edits that track', async () => {
     expect(mockSetEditTask).toHaveBeenCalledTimes(1)
     expect(mockSetEditTask).toHaveBeenCalledWith(taskSet.tasks[0])
 })
+

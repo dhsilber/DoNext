@@ -2,13 +2,15 @@ import { Task } from "../DoData"
 
 interface TaskListElementProps {
     task: Task
+    currentTask: boolean
     save: (task: Task) => void
     setEditTask: (task: Task) => void
 }
 
-const TaskListElement = ({ task, save, setEditTask }: TaskListElementProps) => {
+const TaskListElement = ({ task, currentTask, save, setEditTask }: TaskListElementProps) => {
+    const className = currentTask ? 'current-task' : ''
     return <div>
-        <label>
+        <label className={className}>
             <input
                 type='checkbox'
                 onClick={(event) => {
