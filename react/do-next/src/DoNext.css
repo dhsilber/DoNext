@@ -1,3 +1,10 @@
+:root {
+  --default-background-color: #90b1f3;
+  --focus-bacground-color: #d00;
+
+  /* --default-background-color: #90b1f3; */
+}
+
 .App {
   display: grid;
   grid-template-areas:
@@ -25,50 +32,54 @@
 
 .tasks {
   grid-area: tasks;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
+}
+
+.current-task {
+  background-color: var(--focus-bacground-color);
 }
 
 .events {
   grid-area: events;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .todo {
   grid-area: todo;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .notes {
   grid-area: notes;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .projects {
   grid-area: projects;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .storageTodo {
   grid-area: storageTodo;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .storageEvent {
   grid-area: storageEvent;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .storageProject {
   grid-area: storageProject;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .storageTask {
   grid-area: storageTask;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }
 
 .storageTrack {
   grid-area: storageTrack;
-  background-color: #90b1f3;
+  background-color: var(--default-background-color);
 }

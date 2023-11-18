@@ -12,10 +12,11 @@ const TaskList = ({ taskSet, save, setEditTask }: TaskListProps) => {
     return <>
         {taskSet.tasks
             .filter(task => task.archived === 0)
-            .map((task) => {
+            .map((task, index) => {
                 return <TaskListElement
                     key={'task' + task.id}
                     task={task}
+                    currentTask = {index == 0}
                     save={save}
                     setEditTask={setEditTask}
                 />
