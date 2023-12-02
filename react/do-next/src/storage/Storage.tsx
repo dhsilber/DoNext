@@ -6,6 +6,13 @@ import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
+function navigateToDataInterchange() {
+    const url = "/data-interchange"
+    const link = document.createElement("a")
+    link.href = url
+    link.click()
+}
+
 export const defaultToDoData: TodoSet = {
     todos: [
         { text: "Download default configuration", done: 0, days: [], persist: false },
@@ -99,6 +106,12 @@ const Storage = () => {
             <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
             <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' />
+            <div>
+                <a className="btn" href="/data-interchange">Data Interchange</a>
+            </div>
+            <div>
+                <button onClick={() => navigateToDataInterchange()}>Data Interchange</button>
+            </div>
         </div>
         <div className='storageEvent'>
             <h3>Events Storage</h3>
