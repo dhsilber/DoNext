@@ -83,3 +83,11 @@
   grid-area: storageTrack;
   background-color: var(--default-background-color);
 }
+
+@media screen and (max-width: 600px) {
+  .App {
+    grid-template-areas:
+    "todo"
+    "storageTodo"
+  }
+}
