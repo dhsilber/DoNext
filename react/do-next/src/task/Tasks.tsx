@@ -39,6 +39,7 @@ const Tasks = () => {
         {edit && <TaskEdit task={editTask} save={save} />}
         <br />
         <button onClick={() => setEdit(true)} >+</button>
+        <a className="btn" href="/data-interchange">Data Interchange</a>
     </div>
 }
 
