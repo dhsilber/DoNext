@@ -6,6 +6,19 @@ import { defaultTaskData } from '../storage/Storage'
 import TaskEdit from './TaskEdit'
 import TaskList from './TaskList'
 import { taskStore } from './TaskStore'
+import { set } from 'mockdate'
+
+
+export type State = {
+    taskLine: number
+}
+
+export type Action =
+    | { type: 'down' }
+    | { type: 'up' }
+    | { type: 'move-down' }
+    | { type: 'move-up' }
+
 
 const emptyTask: Task = {
     id: 0,
@@ -23,6 +36,42 @@ const Tasks = () => {
     const [edit, setEdit] = useState(false)
     const [editTask, setEditTask] = useState(emptyTask)
 
+
+    const keystrokeReducer = (state: State, action: Action): State => {
+        switch (action.type) {
+            case 'down':
+                if (state.taskLine < taskStorage.tasks.length - 1 ) {
+                    return { taskLine: state.taskLine + 1 }
+                } else {
+                    return state
+                }
+
+            case 'up':
+                if (state.taskLine > 0 ) {
+                    return { taskLine: state.taskLine - 1 }
+                } else {
+                    return state
+                }
+                
+            case 'move-down':
+                if (state.taskLine < taskStorage.tasks.length - 1 ) {
+                    swapTasks(state.taskLine)
+                    return { taskLine: state.taskLine + 1 }
+                } else {
+                    return state
+                }
+                
+            case 'move-up':
+                if (state.taskLine > 0 ) {
+                    swapTasks(state.taskLine - 1)
+                    return { taskLine: state.taskLine - 1 }
+                } else {
+                    return state
+                }
+                
+        }
+    }
+
     const save = (task: Task) => {
         setEdit(false)
         taskStore(task, taskStorage, setTaskStorage)
@@ -34,8 +83,26 @@ const Tasks = () => {
         setEditTask(task)
     }
 
+    const swapTasks = (firstTask: number) => {
+        console.log('swapTasks - firstTask: ', firstTask)
+        let foo = taskStorage.tasks
+        console.log('swapTasks - taskStorage.tasksJ: ', taskStorage.tasks)
+        console.log('swapTasks - foo: ', foo)
+        const holder = foo[firstTask]
+        foo[firstTask] = foo[firstTask + 1]
+        foo[firstTask + 1] = holder
+        console.log('swapTasks - foo: ', foo)
+        setTaskStorage({ tasks: foo, last_id: taskStorage.last_id })
+    }
+
     return <div className='tasks'>
-        <TaskList taskSet={taskStorage} save={save} setEditTask={setEditState} />
+        <TaskList
+            taskSet={taskStorage}
+            save={save}
+            setEditTask={setEditState}
+            swap={swapTasks}
+            keystrokeReducer={keystrokeReducer}
+        />
         {edit && <TaskEdit task={editTask} save={save} />}
         <br />
         <button onClick={() => setEdit(true)} >+</button>
