@@ -90,47 +90,45 @@
   .App {
     grid-template-areas:
       "todo"
+      "tasks"
       "storageTodo";
+    gap: 1px;
   }
 
-.analyze {
-  display: none;
-}
+  .analyze {
+    display: none;
+  }
 
-.track {
-  display: none;
-}
+  .track {
+    display: none;
+  }
 
-.tasks {
-  display: none;
-}
+  .events {
+    display: none;
+  }
 
-.events {
-  display: none;
-}
+  .notes {
+    display: none;
+  }
 
-.notes {
-  display: none;
-}
+  .projects {
+    display: none;
+  }
 
-.projects {
-  display: none;
-}
+  .storageEvent {
+    display: none;
+  }
 
-.storageEvent {
-  display: none;
-}
+  .storageProject {
+    display: none;
+  }
 
-.storageProject {
-  display: none;
-}
+  .storageTask {
+    display: none;
+  }
 
-.storageTask {
-  display: none;
-}
-
-.storageTrack {
-  display: none;
-}
+  .storageTrack {
+    display: none;
+  }
 
 }
