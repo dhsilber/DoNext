@@ -107,9 +107,6 @@ const Storage = () => {
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
             <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' />
             <div>
-                <a className="btn" href="/data-interchange">Data Interchange</a>
-            </div>
-            <div>
                 <button onClick={() => navigateToDataInterchange()}>Data Interchange</button>
             </div>
         </div>
