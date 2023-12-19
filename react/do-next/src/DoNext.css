@@ -8,8 +8,6 @@
 .App {
   display: grid;
   grid-template-areas:
-    /* "todo"
-    "storageTodo" */
     "todo tasks events"
     "storageTodo storageTask storageEvent"
     "track projects analyze"

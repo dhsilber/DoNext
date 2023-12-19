@@ -54,18 +54,22 @@ const Tasks = () => {
                 }
                 
             case 'move-down':
+                console.log('move-down line: ', state.taskLine, taskStorage.tasks)
                 if (state.taskLine < taskStorage.tasks.length - 1 ) {
                     swapTasks(state.taskLine)
                     return { taskLine: state.taskLine + 1 }
                 } else {
+                    console.log( 'move-down - no change')
                     return state
                 }
                 
             case 'move-up':
+                console.log('move-up line: ', state.taskLine, taskStorage.tasks)
                 if (state.taskLine > 0 ) {
                     swapTasks(state.taskLine - 1)
                     return { taskLine: state.taskLine - 1 }
                 } else {
+                    console.log( 'move-up - no change')
                     return state
                 }
                 
@@ -100,7 +104,6 @@ const Tasks = () => {
             taskSet={taskStorage}
             save={save}
             setEditTask={setEditState}
-            swap={swapTasks}
             keystrokeReducer={keystrokeReducer}
         />
         {edit && <TaskEdit task={editTask} save={save} />}
