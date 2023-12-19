@@ -26,7 +26,7 @@ test('shows list of tasks', () => {
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} swap={() => {}} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toBeInTheDocument()
     expect(screen.getByText('other project')).toBeInTheDocument()
@@ -56,7 +56,7 @@ test('does not show archived tasks', () => {
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} swap={() => {}} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toBeInTheDocument()
     expect(screen.queryByText('other project')).not.toBeInTheDocument()
@@ -84,7 +84,7 @@ test('each task has a checkbox', () => {
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} swap={() => {}} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByRole('checkbox', { name: 'project name' })).toBeInTheDocument()
     expect(screen.getByRole('checkbox', { name: 'other project' })).toBeInTheDocument()
@@ -121,7 +121,7 @@ test('first task is highlighted', () => {
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} swap={() => {}} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toHaveClass('current-task')
     expect(screen.getByText('other project')).not.toHaveClass('current-task')
@@ -144,7 +144,7 @@ test('clicking a & button edits that track', async () => {
         ],
         last_id: 1,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={mockSetEditTask} swap={() => {}} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={mockSetEditTask} keystrokeReducer={fakeKeystrokeReducer}/>)
     const ampersandButtonElement = screen.getByRole('button', { name: '&' })
 
     await user.click(ampersandButtonElement)

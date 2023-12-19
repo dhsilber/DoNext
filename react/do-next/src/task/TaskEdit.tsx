@@ -25,6 +25,7 @@ const TaskEdit = ({ task, save }: TaskEditProps) => {
                 const data = (event.target as HTMLInputElement).value
                 setText(data)
             }}
+            autoFocus
         /></label>
         <select
             value={project}
