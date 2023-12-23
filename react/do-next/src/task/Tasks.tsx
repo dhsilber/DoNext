@@ -6,7 +6,6 @@ import { defaultTaskData } from '../storage/Storage'
 import TaskEdit from './TaskEdit'
 import TaskList from './TaskList'
 import { taskStore } from './TaskStore'
-import { set } from 'mockdate'
 
 
 export type State = {
@@ -18,6 +17,7 @@ export type Action =
     | { type: 'up' }
     | { type: 'move-down' }
     | { type: 'move-up' }
+    | { type: 'indent-right' }
 
 
 const emptyTask: Task = {
@@ -25,8 +25,8 @@ const emptyTask: Task = {
     text: '',
     details: '',
     archived: 0,
-    project: 0,
     time: 0,
+    tasks: [],
 }
 
 const Tasks = () => {
@@ -72,7 +72,22 @@ const Tasks = () => {
                     console.log( 'move-up - no change')
                     return state
                 }
+
+            case 'indent-right':
+                console.log('indent-right: ', state.taskLine, taskStorage.tasks)
+                if (state.taskLine > 0 ) {
+                    const parentTask = taskStorage.tasks[state.taskLine - 1]
+                    console.log('parent: ', parentTask.text)
+                    const task = taskStorage.tasks.splice(state.taskLine, 1)[0]
+                    console.log('task being moved: ', task.text)
+                    parentTask.tasks.push(task)
+                    setTaskStorage(taskStorage)
+                }
+                return state
                 
+            default:
+                console.error('Unhandled action type.')
+                return state                
         }
     }
 
@@ -101,7 +116,8 @@ const Tasks = () => {
 
     return <div className='tasks'>
         <TaskList
-            taskSet={taskStorage}
+            taskList={taskStorage.tasks}
+            indentation={0}
             save={save}
             setEditTask={setEditState}
             keystrokeReducer={keystrokeReducer}

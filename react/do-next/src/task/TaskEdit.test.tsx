@@ -9,8 +9,8 @@ const emptyTask: Task = {
     text: '',
     details: '',
     archived: 0,
-    project: 0,
     time: 0,
+    tasks: [],
 }
 
 test('has form contents for initial entry', () => {
@@ -33,8 +33,8 @@ test('has form contents upon later edit', () => {
         text: 'track name',
         details: 'detailed notes',
         archived: 0,
-        project: 1,
         time: 0,
+        tasks: [],
     }
 
     render(<TaskEdit task={taskWithData} save={() => { }} />)
@@ -55,8 +55,8 @@ test('done button sends initial data to callback', async () => {
         text: 'name',
         details: 'notes',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     render(<TaskEdit task={emptyTask} save={mockSave} />)
 
@@ -74,8 +74,8 @@ test('done button sends changed data to callback', async () => {
         text: 'name',
         details: 'notes',
         archived: 0,
-        project: 1,
         time: 0,
+        tasks: [],
     }
     const projectTestData: ProjectSet = {
         projects: [{ id: 1, text: 'Project One', beginning: 0, minutes: 0 }],
@@ -101,8 +101,8 @@ test('initial data is default', async () => {
         text: 'task',
         details: 'ideas',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     render(<TaskEdit task={expected} save={mockSave} />)
 
@@ -123,16 +123,16 @@ test('changed data is saved', async () => {
         text: 'task',
         details: 'ideas',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     const expected: Task = {
         id: 0,
         text: 'different task',
         details: 'thoughts',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     render(<TaskEdit task={initial} save={mockSave} />)
     const textField = screen.getByLabelText('text:')

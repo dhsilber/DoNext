@@ -2,7 +2,8 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import DoNext from './DoNext'
 import Edit from './Edit'
-import DataInterchange from "./DataInterchange"
+import TodoDataInterchange from "./todo/TodoDataInterchange"
+import TaskDataInterchange from "./task/TaskDataInterchange"
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
       <Route path="/" >
         <Route index element={<DoNext />} />
         <Route path="edit" element={<Edit />} />
-        <Route path="data-interchange" element={<DataInterchange />} />
+        <Route path="todo-data-interchange" element={<TodoDataInterchange />} />
+        <Route path="task-data-interchange" element={<TaskDataInterchange />} />
       </Route>
     </Routes>
   </BrowserRouter>

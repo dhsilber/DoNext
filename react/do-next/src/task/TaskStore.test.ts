@@ -6,8 +6,8 @@ const emptyTask: Task = {
     text: '',
     details: '',
     archived: 0,
-    project: 0,
     time: 0,
+    tasks: [],
 }
 
 const emptyTaskSet: TaskSet = {
@@ -30,8 +30,8 @@ test('stores new content', () => {
         text: 'a',
         details: 'a stuff',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     const expected: TaskSet = {
         tasks: [{
@@ -39,8 +39,8 @@ test('stores new content', () => {
             text: 'a',
             details: 'a stuff',
             archived: 0,
-            project: 0,
             time: 0,
+            tasks: [],
         }],
         last_id: 1,
     }
@@ -57,8 +57,8 @@ test('updates existing content', () => {
         text: 'a redux',
         details: 'different stuff here',
         archived: someTime,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     const initial: TaskSet = {
         tasks: [
@@ -67,8 +67,8 @@ test('updates existing content', () => {
                 text: 'a',
                 details: 'a stuff',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 1,
@@ -80,8 +80,8 @@ test('updates existing content', () => {
                 text: 'a redux',
                 details: 'different stuff here',
                 archived: someTime,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 1,
@@ -99,8 +99,8 @@ test('will store multiple tasks with the same text', () => {
         text: 'a',
         details: 'different stuff here',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     const initial: TaskSet = {
         tasks: [
@@ -109,8 +109,8 @@ test('will store multiple tasks with the same text', () => {
                 text: 'a',
                 details: 'a stuff',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 1,
@@ -122,16 +122,16 @@ test('will store multiple tasks with the same text', () => {
                 text: 'a',
                 details: 'a stuff',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2,
                 text: 'a',
                 details: 'different stuff here',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 2,
@@ -149,8 +149,8 @@ test('if id does not match existing record store it', () => {
         text: 'a',
         details: 'different stuff here',
         archived: 0,
-        project: 0,
         time: 0,
+        tasks: [],
     }
     const initial: TaskSet = {
         tasks: [
@@ -159,8 +159,8 @@ test('if id does not match existing record store it', () => {
                 text: 'a',
                 details: 'a stuff',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 1,
@@ -172,16 +172,16 @@ test('if id does not match existing record store it', () => {
                 text: 'a',
                 details: 'a stuff',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2,
                 text: 'a',
                 details: 'different stuff here',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             }
         ],
         last_id: 2,
