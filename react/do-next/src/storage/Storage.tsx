@@ -2,12 +2,19 @@ import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
 import { EventStorageKey, ProjectStorageKey, TaskStorageKey, TodoStorageKey, TrackStorageKey } from '../Constants'
-import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet } from '../DoData'
+import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet, TaskSetV2 } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
-function navigateToDataInterchange() {
-    const url = "/data-interchange"
+function navigateToTodoDataInterchange() {
+    const url = "/todo-data-interchange"
+    const link = document.createElement("a")
+    link.href = url
+    link.click()
+}
+
+function navigateToTaskDataInterchange() {
+    const url = "/task-data-interchange"
     const link = document.createElement("a")
     link.href = url
     link.click()
@@ -73,6 +80,11 @@ export const defaultTaskData: TaskSet = {
     last_id: 0,
 }
 
+export const defaultTaskDataV2: TaskSetV2 = {
+    tasks: [],
+    last_id: 0,
+}
+
 const Storage = () => {
 
     const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
@@ -85,6 +97,10 @@ const Storage = () => {
 
     const [taskStorage, setTaskStorage] = useLocalStorageState(TaskStorageKey, {
         defaultValue: defaultTaskData
+    })
+
+    const [taskStorageV2, setTaskStorageV2] = useLocalStorageState(TaskStorageKey, {
+        defaultValue: defaultTaskDataV2
     })
 
     const [trackStorage, setTrackStorage] = useLocalStorageState(TrackStorageKey, {
@@ -102,12 +118,15 @@ const Storage = () => {
     const projectData = JSON.stringify(projectStorage, null, 2)
 
     return <>
-        <div className='storageTodo'>
-            <h3>Todos Storage</h3>
+        <div className='storage'>
+            {/* <h3>Todos Storage</h3>
             <LoadData setData={setTodoStorage} prompt={"Ingest todos:"} />
-            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' />
+            <UnloadData jsonData={todoData} prompt={"Download todos"} fileName='doNextTodoDownload.json' /> */}
             <div>
-                <button onClick={() => navigateToDataInterchange()}>Data Interchange</button>
+                <button onClick={() => navigateToTodoDataInterchange()}>Todo Data Interchange</button>
+            </div>
+            <div>
+                <button onClick={() => navigateToTaskDataInterchange()}>Task Data Interchange</button>
             </div>
         </div>
         <div className='storageEvent'>

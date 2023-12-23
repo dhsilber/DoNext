@@ -15,7 +15,6 @@ const TaskEdit = ({ task, save }: TaskEditProps) => {
     })
     const [text, setText] = useState(task.text || '')
     const [details, setDetails] = useState(task.details || '')
-    const [project, setProject] = useState(task.project || 0)
 
     return <div>
         <label>text:<input
@@ -27,19 +26,6 @@ const TaskEdit = ({ task, save }: TaskEditProps) => {
             }}
             autoFocus
         /></label>
-        <select
-            value={project}
-            onChange={(event) => {
-                setProject(parseInt(event.target.value))
-            }}
-        >
-            <option key={'project0'} value={0}>No project</option>
-            {projectStorage.projects.map(project =>
-                <option key={'project' + project.id} value={project.id}>
-                    {project.text}
-                </option>
-            )}
-        </select>
         <br />
         <label>details:<input
             defaultValue={details}
@@ -56,8 +42,8 @@ const TaskEdit = ({ task, save }: TaskEditProps) => {
                 text: text,
                 details: details,
                 archived: task.archived,
-                project: project,
                 time: 0,
+                tasks: [],
             })
         }} >Done</button>
     </div>

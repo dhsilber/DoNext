@@ -15,18 +15,18 @@ test('shows list of tasks', () => {
         tasks: [
             {
                 id: 1, text: 'project name', details: 'notes', archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2, text: 'other project', details: 'ideas', archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskList={taskSet.tasks} indentation={0} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toBeInTheDocument()
     expect(screen.getByText('other project')).toBeInTheDocument()
@@ -42,21 +42,21 @@ test('does not show archived tasks', () => {
                 text: 'project name',
                 details: 'notes',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2,
                 text: 'other project',
                 details: 'ideas',
                 archived: currentTime,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskList={taskSet.tasks} indentation={0} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toBeInTheDocument()
     expect(screen.queryByText('other project')).not.toBeInTheDocument()
@@ -70,21 +70,21 @@ test('each task has a checkbox', () => {
                 text: 'project name',
                 details: 'notes',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2,
                 text: 'other project',
                 details: 'ideas',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskList={taskSet.tasks} indentation={0} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByRole('checkbox', { name: 'project name' })).toBeInTheDocument()
     expect(screen.getByRole('checkbox', { name: 'other project' })).toBeInTheDocument()
@@ -107,21 +107,21 @@ test('first task is highlighted', () => {
                 text: 'project name',
                 details: 'notes',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
             {
                 id: 2,
                 text: 'other project',
                 details: 'ideas',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
         ],
         last_id: 2,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskList={taskSet.tasks} indentation={0} save={() => { }} setEditTask={() => { }} keystrokeReducer={fakeKeystrokeReducer}/>)
 
     expect(screen.getByText('project name')).toHaveClass('current-task')
     expect(screen.getByText('other project')).not.toHaveClass('current-task')
@@ -138,13 +138,13 @@ test('clicking a & button edits that track', async () => {
                 text: 'project name',
                 details: 'notes',
                 archived: 0,
-                project: 0,
                 time: 0,
+                tasks: [],
             },
         ],
         last_id: 1,
     }
-    render(<TaskList taskSet={taskSet} save={() => { }} setEditTask={mockSetEditTask} keystrokeReducer={fakeKeystrokeReducer}/>)
+    render(<TaskList taskList={taskSet.tasks} indentation={0} save={() => { }} setEditTask={mockSetEditTask} keystrokeReducer={fakeKeystrokeReducer}/>)
     const ampersandButtonElement = screen.getByRole('button', { name: '&' })
 
     await user.click(ampersandButtonElement)
