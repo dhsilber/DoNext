@@ -1,26 +1,29 @@
+import { useContext, useReducer } from "react"
 import { Task } from "../DoData"
 import TaskList from "./TaskList"
-import { State, Action } from './Tasks'
+import { State, Action, StateContext } from './Tasks'
 
 interface TaskListElementProps {
     task: Task
-    currentTask: boolean
     indentation: number
     save: (task: Task) => void
     setEditTask: (task: Task) => void
-    keystrokeReducer: (state: State, action: Action) => State
+    actionReducer: (state: State, action: Action) => State
 }
 
-const TaskListElement = ({ task, currentTask, indentation, save, setEditTask, keystrokeReducer }: TaskListElementProps) => {
-    console.log('TaskListElement - indentation: ', indentation)
+const TaskListElement = ({ task, indentation, save, setEditTask, actionReducer }: TaskListElementProps) => {
+    const [state, dispatch] = useContext(StateContext)
 
-    const className = currentTask ? 'current-task' : ''
+    // console.log( 'State on entering TaskListElement: ', state)
+    // console.log('TaskListElement - indentation: ', indentation)
+
+    const className = state.currentTaskId === task.id ? 'current-task' : ''
     let indent = ''
     for( let spaces = 0; spaces < indentation; spaces++){
         indent += '-- '
         // indent += '&nbsp;'
     }
-    console.log('indentation: ', indent)
+    // console.log('indentation: ', indent)
     return <>
         <div>
             {indent}
@@ -41,7 +44,7 @@ const TaskListElement = ({ task, currentTask, indentation, save, setEditTask, ke
             indentation={indentation + 1}
             save={save}
             setEditTask={setEditTask}
-            keystrokeReducer={keystrokeReducer}
+            actionReducer={actionReducer}
         />
     </>
 }

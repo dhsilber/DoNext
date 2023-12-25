@@ -2,7 +2,7 @@ import useLocalStorageState from 'use-local-storage-state'
 import '../DoNext.css'
 import { TaskStorageKey } from '../Constants'
 import { useState } from 'react'
-import { TaskSet, TaskSetV2, TaskV2 } from '../DoData'
+import { TaskSet } from '../DoData'
 
 function navigateToHome() {
     const link = document.createElement("a")
@@ -12,7 +12,7 @@ function navigateToHome() {
 
 function TaskDataInterchange() {
     const [taskStorage, setTaskStorage] = useLocalStorageState<TaskSet>(TaskStorageKey, {})
-    const [taskStorageV2, setTaskStorageV2] = useLocalStorageState<TaskSetV2>(TaskStorageKey, {})
+    // const [taskStorageV2, setTaskStorageV2] = useLocalStorageState<TaskSetV2>(TaskStorageKey, {})
     const [taskData, setTaskData] = useState('')
 
     function handleIncomingTasks(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -26,7 +26,7 @@ function TaskDataInterchange() {
             <button onClick={() => setTaskData('')}>Clear</button>
             <button onClick={() => setTaskData(currentTaskData)}>Export Task data</button>
             <button onClick={() => setTaskStorage(JSON.parse(taskData))}>Import Task data</button>
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 const v1Storage: TaskSet = taskStorage!
                 let v2Storage: TaskSetV2 = {tasks: [], last_id: v1Storage.last_id}
                 v1Storage.tasks.forEach(task => {
@@ -44,8 +44,7 @@ function TaskDataInterchange() {
                 setTaskStorageV2(v2Storage)
                 setTaskData(JSON.stringify(v2Storage, null, 2))
             }
-            }>Convert Task data</button>
-                
+            }>Convert Task data</button> */}
             <button onClick={() => navigateToHome()}>Return to main page</button>
         </div>
         <div>

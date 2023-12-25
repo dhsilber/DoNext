@@ -29,9 +29,7 @@ test('plus button starts new edit dialog second time it is used', async () => {
     expect(screen.queryByText('some task name')).not.toBeInTheDocument()
     expect(screen.queryByText('notes')).not.toBeInTheDocument()
     expect(screen.getByLabelText('text:')).toHaveDisplayValue('')
-    expect(screen.getByLabelText('details:')).toHaveDisplayValue('')
     await user.type(screen.getByLabelText('text:'), 'some task name')
-    await user.type(screen.getByLabelText('details:'), 'notes')
     await user.click(screen.getByRole('button', { name: 'Done' }))
     const element = screen.getByRole('button', { name: '+' })
     
@@ -39,7 +37,6 @@ test('plus button starts new edit dialog second time it is used', async () => {
     
     expect(screen.getByText('some task name')).toBeInTheDocument()
     expect(screen.getByLabelText('text:')).toHaveDisplayValue('')
-    expect(screen.getByLabelText('details:')).toHaveDisplayValue('')
     expect(screen.getByText('Done')).toBeInTheDocument
 })
 
@@ -71,7 +68,6 @@ test('after finishing intial edit, task shows in list', async () => {
     
     expect(screen.queryByText('task name')).toBeInTheDocument()
     expect(screen.queryByText('text:')).not.toBeInTheDocument()
-    expect(screen.queryByText('details:')).not.toBeInTheDocument()
 })
 
 test('clicking a checkbox archives task', async () => {
@@ -83,7 +79,6 @@ test('clicking a checkbox archives task', async () => {
     const plusButtonElement = screen.getByRole('button', { name: '+' })
     await user.click(plusButtonElement)
     await user.type(screen.getByLabelText('text:'), 'some task name')
-    await user.type(screen.getByLabelText('details:'), 'notes')
     await user.click(screen.getByRole('button', { name: 'Done' }))
 
     await user.click(screen.getByRole('checkbox', { name: 'some task name' }))
@@ -104,9 +99,7 @@ test('clicking a task\`s ampersand button edits that task', async () => {
     expect(screen.queryByText('some task name')).not.toBeInTheDocument()
     expect(screen.queryByText('notes')).not.toBeInTheDocument()
     expect(screen.getByLabelText('text:')).toHaveDisplayValue('')
-    expect(screen.getByLabelText('details:')).toHaveDisplayValue('')
     await user.type(screen.getByLabelText('text:'), 'some task name')
-    await user.type(screen.getByLabelText('details:'), 'notes')
 
     await user.click(screen.getByRole('button', { name: 'Done' }))
     
@@ -117,5 +110,4 @@ test('clicking a task\`s ampersand button edits that task', async () => {
 
     expect(screen.queryByText('some task name')).toBeInTheDocument()
     expect(screen.getByLabelText('text:')).toHaveDisplayValue('some task name')
-    expect(screen.getByLabelText('details:')).toHaveDisplayValue('notes')
 })

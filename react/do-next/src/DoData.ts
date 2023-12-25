@@ -52,32 +52,32 @@ export interface TrackSet {
     tracks: Track[]
 }
 
-export interface TaskV2 {
-    id: number
-    current: boolean
-    text: string
-    archived: number
-    time: number
-    tasks: Task[]
-}
+// export interface TaskV2 {
+//     id: number
+//     current: boolean
+//     text: string
+//     archived: number
+//     time: number
+//     tasks: Task[]
+// }
 
 export interface Task {
     id: number
     text: string
-    details: string
     archived: number
     time: number
     tasks: Task[]
 }
 
 export interface TaskSet {
-    tasks: Task[]
+    taskRoot: Task
+    currentTask: Task
     last_id: number
 }
 
-export interface TaskSetV2 {
-    tasks: TaskV2[]
-    last_id: number
-}
+// export interface TaskSetV2 {
+//     tasks: TaskV2[]
+//     last_id: number
+// }
 
 

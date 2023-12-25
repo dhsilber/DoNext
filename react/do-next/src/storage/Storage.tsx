@@ -2,7 +2,7 @@ import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
 import { EventStorageKey, ProjectStorageKey, TaskStorageKey, TodoStorageKey, TrackStorageKey } from '../Constants'
-import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet, TaskSetV2 } from '../DoData'
+import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet, Task } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
 
@@ -75,15 +75,24 @@ export const defaultTrackData: TrackSet = {
     tracks: []
 }
 
+let defaultTaskRoot: Task = {
+    id: 0,
+    text: 'Root Task',
+    archived: 0,
+    time: 0,
+    tasks: []
+}
+
 export const defaultTaskData: TaskSet = {
-    tasks: [],
+    taskRoot: defaultTaskRoot,
+    currentTask: defaultTaskRoot,
     last_id: 0,
 }
 
-export const defaultTaskDataV2: TaskSetV2 = {
-    tasks: [],
-    last_id: 0,
-}
+// export const defaultTaskDataV2: TaskSetV2 = {
+//     tasks: [],
+//     last_id: 0,
+// }
 
 const Storage = () => {
 
@@ -99,9 +108,9 @@ const Storage = () => {
         defaultValue: defaultTaskData
     })
 
-    const [taskStorageV2, setTaskStorageV2] = useLocalStorageState(TaskStorageKey, {
-        defaultValue: defaultTaskDataV2
-    })
+    // const [taskStorageV2, setTaskStorageV2] = useLocalStorageState(TaskStorageKey, {
+    //     defaultValue: defaultTaskDataV2
+    // })
 
     const [trackStorage, setTrackStorage] = useLocalStorageState(TrackStorageKey, {
         defaultValue: defaultEventData
