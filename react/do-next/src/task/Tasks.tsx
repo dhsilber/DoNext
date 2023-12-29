@@ -204,19 +204,20 @@ const Tasks = () => {
 
         setTaskStorage({ taskRoot: foo, currentTask: foo.tasks[firstIndex + 1], last_id: taskStorage.last_id })
     }
-
+    
     // emptyTask.parent = taskStorage.taskRoot
-
+    
     // console.log( 'State on entering render: ', state)
-
+    
     if (state.currentTaskId === 0) {
-        let initialId = 0
+        // let initialId = 0
         if (typeof taskStorage.taskRoot !== "undefined" && taskStorage.taskRoot.tasks.length > 0) {
-            initialId = taskStorage.taskRoot.tasks[0].id
+            // initialId = taskStorage.taskRoot.tasks[0].id
+            setTaskStorage(defaultTaskData)
         }
         dispatch({
             type: 'initialize',
-            taskId: initialId
+            taskId: taskStorage.taskRoot.tasks[0].id
         })
     }
 
