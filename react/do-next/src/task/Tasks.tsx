@@ -210,12 +210,8 @@ const Tasks = () => {
     // console.log( 'State on entering render: ', state)
     
     if (state.currentTaskId === 0) {
-        if (typeof taskStorage.taskRoot === "undefined") {
+        if (typeof taskStorage.taskRoot === "undefined" || taskStorage.taskRoot.tasks.length < 1) {
             setTaskStorage(defaultTaskData)
-            dispatch({
-                type: 'initialize',
-                taskId: 0
-            })
         }
         else {
             dispatch({
