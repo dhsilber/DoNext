@@ -210,17 +210,19 @@ const Tasks = () => {
     // console.log( 'State on entering render: ', state)
     
     if (state.currentTaskId === 0) {
-        let initialId = 0
         if (typeof taskStorage.taskRoot === "undefined") {
             setTaskStorage(defaultTaskData)
+            dispatch({
+                type: 'initialize',
+                taskId: 0
+            })
         }
         else {
-            initialId = taskStorage.taskRoot.tasks[0].id
+            dispatch({
+                type: 'initialize',
+                taskId: taskStorage.taskRoot.tasks[0].id
+            })
         }
-        dispatch({
-            type: 'initialize',
-            taskId: initialId
-        })
     }
 
     return <StateContext.Provider value={[state, dispatch]}>
