@@ -1,7 +1,7 @@
 import React from 'react'
 import '../DoNext.css'
 import useLocalStorageState from 'use-local-storage-state'
-import { EventStorageKey, ProjectStorageKey, TaskStorageKey, TodoStorageKey, TrackStorageKey } from '../Constants'
+import { EventStorageKey, ProjectStorageKey, TaskStorageKey, TrackStorageKey } from '../Constants'
 import { EventSet, TodoSet, ProjectSet, TrackSet, TaskSet, Task } from '../DoData'
 import LoadData from '../LoadData'
 import UnloadData from '../UnloadData'
@@ -96,9 +96,9 @@ export const defaultTaskData: TaskSet = {
 
 const Storage = () => {
 
-    const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
-        defaultValue: defaultToDoData
-    })
+    // const [todoStorage, setTodoStorage] = useLocalStorageState(TodoStorageKey, {
+    //     defaultValue: defaultToDoData
+    // })
 
     const [eventStorage, setEventStorage] = useLocalStorageState(EventStorageKey, {
         defaultValue: defaultEventData
@@ -120,7 +120,7 @@ const Storage = () => {
         defaultValue: defaultProjectData
     })
 
-    const todoData = JSON.stringify(todoStorage, null, 2)
+    // const todoData = JSON.stringify(todoStorage, null, 2)
     const eventData = JSON.stringify(eventStorage, null, 2)
     const taskData = JSON.stringify(taskStorage, null, 2)
     const trackData = JSON.stringify(trackStorage, null, 2)
@@ -146,7 +146,7 @@ const Storage = () => {
         <div className='storageTask'>
             <h3>Tasks Storage</h3>
             <LoadData setData={setTaskStorage} prompt={"Ingest tasks:"} />
-            <UnloadData jsonData={taskData} prompt={"Download tasks"} fileName='doNextTasksDownload.json' />
+            <UnloadData jsonData={taskData} prompt={"Download tasks"} fileName='doNextTasks/tasks.json' />
         </div>
         <div className='storageTrack'>
             <h3>Tracks Storage</h3>

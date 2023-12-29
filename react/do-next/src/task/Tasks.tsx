@@ -7,6 +7,7 @@ import TaskEdit from './TaskEdit'
 import TaskList from './TaskList'
 import { taskStore } from './TaskStore'
 import FindTaskHierarchy from './FindTaskHierarchy'
+import { exportUserInfo } from '../UnloadData'
 
 export type State = {
     currentTaskId: number
@@ -146,16 +147,18 @@ const Tasks = () => {
 
 
     const save = (task: Task) => {
-        console.log( 'State on starting save: ', state)
+        // console.log( 'State on starting save: ', state)
         setEdit(false)
         const savedTask = taskStore(task, taskStorage, setTaskStorage)
-        console.log('savedTask: ', savedTask)
+        // console.log('savedTask: ', savedTask)
+        const taskData = JSON.stringify(taskStorage, null, 2)
+        exportUserInfo(taskData, 'doNextTasks.json')
         dispatch({
             type: 'initialize',
             taskId: savedTask.id
         })
         setEditTask(emptyTask)
-        console.log( 'State on finishing save: ', state)
+        // console.log( 'State on finishing save: ', state)
     }
 
     const setEditState = (task: Task) => {

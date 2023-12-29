@@ -1,6 +1,6 @@
 import React from "react"
 
-function exportUserInfo(jsonData: string, fileName: string) {
+export function exportUserInfo(jsonData: string, fileName: string) {
     const fileData = jsonData + '\n'
     const blob = new Blob([fileData], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
