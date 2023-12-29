@@ -15,8 +15,7 @@ export const taskStore = (
         allTasks.taskRoot.tasks.push(task)
     }
     else {
-        const existingTaskIndex = allTasks.taskRoot.tasks
-            .findIndex(item => item.id === task.id)
+        const existingTaskIndex = allTasks.taskRoot.tasks.findIndex(item => item.id === task.id)
         if (existingTaskIndex === NO_ELEMENT_FOUND) {
             task.id = ++allTasks.last_id
             taskStore(task, allTasks, setStore)
