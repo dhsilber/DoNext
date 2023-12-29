@@ -7,8 +7,6 @@ import TaskEdit from './TaskEdit'
 import TaskList from './TaskList'
 import { taskStore } from './TaskStore'
 import FindTaskHierarchy from './FindTaskHierarchy'
-import findPreviousSiblingId from './findPreviousSiblingId'
-import findNextSiblingId from './findNextSiblingId'
 
 export type State = {
     currentTaskId: number
@@ -41,59 +39,67 @@ const Tasks = () => {
     const [edit, setEdit] = useState(false)
     const [editTask, setEditTask] = useState(emptyTask)
 
-
     const actionReducer = (state: State, action: Action): State => {
-        console.log( 'state: ', state, '. action: ', action)
+        // console.log( 'state: ', state, '. action: ', action)
         switch (action.type) {
             case 'initialize':
                 return {currentTaskId: action.taskId}
 
             case 'down':
-                const taskHierarchyDown = FindTaskHierarchy(taskStorage, state.currentTaskId)
-                let nextCurrentTaskId: number
-                const firstTaskIsFallbackDown = taskStorage.taskRoot.tasks[0].id
-                if( taskHierarchyDown.length < 1) {
-                    nextCurrentTaskId = firstTaskIsFallbackDown
+                const downCurrentIndex = FindTaskHierarchy(taskStorage, state.currentTaskId)
+                // console.log('downCurrentIndex: ',downCurrentIndex)
+                // const firstTaskIsFallbackDown = taskStorage.taskRoot.tasks[0].id
+                // if( taskHierarchyDown.length < 1) {
+                //     nextCurrentTaskId = firstTaskIsFallbackDown
+                // }
+                // else {
+                    // const parentTaskList = taskHierarchyDown[1].tasks
+                    // nextCurrentTaskId = findNextSiblingId(parentTaskList, state.currentTaskId) || firstTaskIsFallbackDown
+                // }
+                if (downCurrentIndex < taskStorage.taskRoot.tasks.length - 1) {
+                    // console.log( 'incrementing to ', downCurrentIndex + 1)
+                    // console.log( taskStorage.taskRoot.tasks[downCurrentIndex + 1].id)
+                    return {currentTaskId: taskStorage.taskRoot.tasks[downCurrentIndex + 1].id}
                 }
                 else {
-                    const parentTaskList = taskHierarchyDown[1].tasks
-                    nextCurrentTaskId = findNextSiblingId(parentTaskList, state.currentTaskId) || firstTaskIsFallbackDown
+                    // console.log( 'bailing out with no change to state ')
+                    return {...state}
                 }
-                return {currentTaskId: nextCurrentTaskId}
 
             case 'up':
-                const taskHierarchy = FindTaskHierarchy(taskStorage, state.currentTaskId)
-                let newCurrentTaskId: number
-                const firstTaskIsFallback = taskStorage.taskRoot.tasks[0].id
-                if( taskHierarchy.length < 1) {
-                    newCurrentTaskId = firstTaskIsFallback
-                }
-                else {
-                    const parentTaskList = taskHierarchy[1].tasks
-                    newCurrentTaskId = findPreviousSiblingId(parentTaskList, state.currentTaskId) || firstTaskIsFallback
-                }
-                return {currentTaskId: newCurrentTaskId}
-                
-            case 'move-down': {
-                const taskHierarchyDown = FindTaskHierarchy(taskStorage, state.currentTaskId)
-                let nextCurrentTaskId: number
-                const firstTaskIsFallbackDown = taskStorage.taskRoot.tasks[0].id
-                if( taskHierarchyDown.length < 1) {
-                    nextCurrentTaskId = firstTaskIsFallbackDown
-                }
-                else {
-                    const parentTaskList = taskHierarchyDown[1].tasks
-                    nextCurrentTaskId = findNextSiblingId(parentTaskList, state.currentTaskId) || firstTaskIsFallbackDown
-                }
-
-                if( taskHierarchyDown.length > 1) {
-                    swapTasks(taskHierarchyDown[1], taskHierarchyDown[0])
-                    return {currentTaskId: nextCurrentTaskId}
+                const upCurrentIndex = FindTaskHierarchy(taskStorage, state.currentTaskId)
+                // let newCurrentTaskId: number
+                // const firstTaskIsFallback = taskStorage.taskRoot.tasks[0].id
+                // if( taskHierarchy.length < 1) {
+                //     newCurrentTaskId = firstTaskIsFallback
+                // }
+                // else {
+                //     const parentTaskList = taskHierarchy[1].tasks
+                //     newCurrentTaskId = findPreviousSiblingId(parentTaskList, state.currentTaskId) || firstTaskIsFallback
+                // }
+                if (upCurrentIndex > 0) {
+                    return {currentTaskId: taskStorage.taskRoot.tasks[upCurrentIndex - 1].id}
                 }
                 else {
                     return {...state}
                 }
 
+            case 'move-down': {
+                const downCurrentIndex = FindTaskHierarchy(taskStorage, state.currentTaskId)
+                if (downCurrentIndex < taskStorage.taskRoot.tasks.length - 1) {
+                    // console.log('downCurrentIndex: ', downCurrentIndex)
+                    // console.log('taskStorage: ', taskStorage)
+                    // console.log('taskStorage.taskRoot: ', taskStorage.taskRoot)
+                    // console.log('taskStorage.taskRoot.tasks: ', taskStorage.taskRoot.tasks)
+                    // console.log('taskStorage.taskRoot.tasks[downCurrentIndex + 1].id: ', taskStorage.taskRoot.tasks[downCurrentIndex + 1].id)
+                    const newTaskId = taskStorage.taskRoot.tasks[downCurrentIndex + 1].id
+                    swapiTasks(taskStorage.taskRoot, downCurrentIndex)
+                    return {currentTaskId: newTaskId}
+                }
+                else {
+                    console.log('not moving')
+                    return {...state}
+                }
             }
                 // console.log('move-down line: ', state.taskLine, taskStorage.tasks)
                 // if (state.taskLine < taskStorage.tasks.length - 1 ) {
@@ -157,7 +163,6 @@ const Tasks = () => {
         setEditTask(task)
     }
 
-
     // TODO This does not allow for updating the state where tasks are nested.
     // This will have to be solved before I can indent a task.
     //
@@ -167,29 +172,50 @@ const Tasks = () => {
     // In theory, I could create a deep copy of the tree I have, then replace the changed substructure.
     //
     // I don't know which of the above will let me get to the working state I want sooner/easier.
-    const swapTasks = (parent: Task, firstTask: Task) => {
-        console.log('swapTasks - parent:', parent, '. firstTask: ', firstTask)
-        const firstIndex = parent.tasks.findIndex(task => task.id === firstTask.id)
+    function swapiTasks(parent: Task, firstTaskIndex: number) {
+        // console.log('swapTasks - parent:', parent, '. firstTaskIndex: ', firstTaskIndex)
+        const firstIndex = firstTaskIndex
         if( firstIndex === -1 || parent.tasks.length < firstIndex + 2) {
             console.log('Bailing out of swapTasks - firstIndex: ', firstIndex)
             return
         }
-        let foo: Task = {...parent}
-        console.log('swapTasks - parent.tasks: ', parent.tasks)
-        console.log('swapTasks - foo: ', foo)
-        foo.tasks[firstIndex] = parent.tasks[firstIndex + 1]
-        foo.tasks[firstIndex + 1] = parent.tasks[firstIndex]
-        console.log('swapTasks - foo: ', foo)
+        // console.log('swapTasks - parent.tasks: ', parent.tasks)
+        let foo: Task = {...parent, tasks: []}
+        let first: Task
+        parent.tasks.forEach((task,index)=> {
+            if( index === firstTaskIndex) {
+                first = task
+            }
+            else if(index === firstTaskIndex + 1) {
+                foo.tasks.push(task)
+                foo.tasks.push(first)
+            }
+            else {
+                foo.tasks.push(task)
+            }
+        })
+        // console.log('swapTasks - foo.tasks: ', foo.tasks)
+        // foo.tasks[firstIndex] = parent.tasks[firstIndex + 1]
+        // foo.tasks[firstIndex + 1] = parent.tasks[firstIndex]
+        // console.log('swapTasks - foo: ', foo)
 
-        const newTaskRoot: Task = {...taskStorage.taskRoot}
+        // const newTaskRoot: Task = {...taskStorage.taskRoot}
         // const copy:Task = structuredClone(taskStorage.taskRoot)
 
-        setTaskStorage({ taskRoot: foo, currentTask: parent.tasks[firstIndex + 1], last_id: taskStorage.last_id })
+        setTaskStorage({ taskRoot: foo, currentTask: foo.tasks[firstIndex + 1], last_id: taskStorage.last_id })
     }
 
     // emptyTask.parent = taskStorage.taskRoot
 
-    console.log( 'State on entering render: ', state)
+    // console.log( 'State on entering render: ', state)
+
+    if( state.currentTaskId === 0 && taskStorage.taskRoot.tasks.length > 0) {
+        dispatch({
+            type: 'initialize',
+            taskId: taskStorage.taskRoot.tasks[0].id
+        })
+    }
+
     return <StateContext.Provider value={[state, dispatch]}>
         <div className='tasks'>
             <TaskList

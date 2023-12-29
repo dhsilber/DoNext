@@ -1,4 +1,4 @@
-import { useContext, useReducer } from "react"
+import { useContext } from "react"
 import { Task } from "../DoData"
 import TaskList from "./TaskList"
 import { State, Action, StateContext } from './Tasks'
@@ -12,7 +12,7 @@ interface TaskListElementProps {
 }
 
 const TaskListElement = ({ task, indentation, save, setEditTask, actionReducer }: TaskListElementProps) => {
-    const [state, dispatch] = useContext(StateContext)
+    const [state] = useContext(StateContext)
 
     // console.log( 'State on entering TaskListElement: ', state)
     // console.log('TaskListElement - indentation: ', indentation)
