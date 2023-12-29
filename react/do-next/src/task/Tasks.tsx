@@ -211,7 +211,7 @@ const Tasks = () => {
     
     if (state.currentTaskId === 0) {
         // let initialId = 0
-        if (typeof taskStorage.taskRoot !== "undefined" && taskStorage.taskRoot.tasks.length > 0) {
+        if (typeof taskStorage.taskRoot === "undefined") {
             // initialId = taskStorage.taskRoot.tasks[0].id
             setTaskStorage(defaultTaskData)
         }
